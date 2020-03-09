@@ -18,12 +18,13 @@
  }
 
  async function generateBanner() {
+	let p;
 	try {
 		let response = await fetch( "projects.json ");
 		if ( !response.ok ) {
 			generateStaticBanner();
 		}
-		let p = await response.json();
+		p = await response.json();
 		if ( !validateProjects( p ) ) {
 			generateStaticBanner();
 		}
@@ -31,6 +32,9 @@
 	} catch( e ) {
 		generateStaticBanner();
 	}
+	p.projects.forEach( function( proj, idx ) {
+		true;
+	})
 
  }
 

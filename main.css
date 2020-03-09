@@ -118,6 +118,7 @@ main {
 	border: black 2px solid;
 	width: 90%;
 	max-width: 900px;
+	height: 50px;
 	min-height: 500px;
 	position: relative;
 	left: 50%;
@@ -126,6 +127,7 @@ main {
 }
 
 main > section {
+	position: relative;
 	margin: 5px;
 	border: black 2px solid;
 	width: calc(100% - 10px);
@@ -151,5 +153,14 @@ main > section {
 
 	nav > .hamburger-menu {
 		display: none;
+	}
+
+	main > section {
+		display: inline-block;
+		height: calc(100% - 10px);
+	}
+
+	section > h2 {
+		text-align: center;
 	}
 }
