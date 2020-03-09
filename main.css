@@ -69,6 +69,14 @@ nav a {
 	margin-bottom: 20px;
 }
 
+.slider-container {
+	position: relative;
+	width: 100%;
+	height: 100%;
+	white-space: nowrap;
+	overflow: hidden;
+}
+
 .banner > p {
 	margin: 0;
 	padding: 0;
@@ -129,6 +137,46 @@ main > section {
 	margin: 5px;
 	border: black 2px solid;
 	width: calc(100% - 10px);
+}
+
+.full-width {
+	width: 100%;
+}
+
+.half-width {
+	width: calc( 100% / 2 );
+}
+
+.third-width {
+	width: calc( 100% / 3 );
+}
+
+.quarter-width {
+	width: calc( 100% / 4 );
+}
+
+.banner-slider {
+	position: absolute;
+	width: 100%;
+	left: 0;
+	top: 0;
+	margin: 0;
+	padding: 0;
+	height: 100%;
+}
+
+.banner-item {
+	display: inline-block;
+	height: 100%;
+}
+
+/* Since we continually reorder the banner items; we have to assigne them even / odd when created */
+.banner-item-even {
+	background-color: blue;
+}
+
+.banner-item-odd {
+	background-color: red;
 }
 
 @media screen and ( min-width: 800px ) {

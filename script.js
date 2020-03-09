@@ -18,6 +18,7 @@
  }
 
  async function generateBanner() {
+	 /*
 	try {
 		let response = await fetch( "projects.json ");
 		if ( !response.ok ) {
@@ -31,7 +32,12 @@
 	} catch( e ) {
 		generateStaticBanner();
 	}
-
+	*/
+	let html = "";
+	for ( let i = 0 ; i < 4 ; i++ ) {
+		html += `<div _idx=${i} _per='3' class="banner-item third-width banner-item-${(i%2)? "even" : "odd"}"><p style="text-align:center;font-size: 2.0rem;color: white">${i}</p></div>`;
+	}
+	$('.banner-slider').prepend(html);
  }
 
 
@@ -48,13 +54,26 @@ function hamburgerMenuHandler() {
 
 function bannerNextHandler() {
 	$('#banner-next').click( function( event ) {
-		// Advance the banner to the next card
+		console.log('banner-next');
+		$('.banner-slider').animate({
+			left: `-=${100/Number($('.banner-item:first-child').attr('_per'))}%`
+		}, 1200, function() {
+			$('.banner-item:last-child').after($('.banner-item:first-child'));
+			$('.banner-slider').css({'left': '0%'});
+		} );
 	});
 }
 
 function bannerPrevHandler() {
-	$('#banner-next').click( function( event ) {
-		// Scroll the banner to the previous card
+	$('#banner-prev').click( function( event ) {
+		console.log('banner-prev');
+		$('.banner-item:first-child').before($('.banner-item:last-child'));
+		$('.banner-slider').css({'left': `-${100/Number($('.banner-item:first-child').attr('_per'))}%`});
+	$('.banner-slider').animate({
+			left: `+=${100/Number($('.banner-item:first-child').attr('_per'))}%`
+		}, 1200, function() {
+			$('.banner-slider').css('left', '0%');
+		} );
 	});
 }
 
@@ -63,6 +82,8 @@ function main() {
 	$(hamburgerMenuHandler);
 	$(bannerPrevHandler);
 	$(bannerNextHandler);
+
+	generateBanner();
 }
 
 main();
