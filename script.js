@@ -35,7 +35,13 @@
 	*/
 	let html = "";
 	for ( let i = 0 ; i < 4 ; i++ ) {
-		html += `<div _idx=${i} _per='3' class="banner-item third-width banner-item-${(i%2)? "even" : "odd"}"><p style="text-align:center;font-size: 2.0rem;color: white">${i}</p></div>`;
+		let per = 1;
+		let width = $('body').width();
+		if ( width >= 900 )
+			per = 3;
+		else if ( width >= 640 )
+			per = 2;
+		html += `<div _idx=${i} _per=${per} class="banner-item width-${per} banner-item-${(i%2)? "even" : "odd"}"><p style="text-align:center;font-size: 2.0rem;color: white">${i}</p></div>`;
 	}
 	$('.banner-slider').prepend(html);
  }
@@ -77,11 +83,28 @@ function bannerPrevHandler() {
 	});
 }
 
+function resizeHandler() {
+	$(window).resize( function( event ) {
+		let per = 1;
+		let width = $('body').width();
+		if ( width >= 900 )
+			per = 3;
+		else if ( width >= 640 )
+			per = 2;
+		for ( let i = 1 ; i < 4 ; i++ ) {
+			$('.banner-item').removeClass(`width-${i}`);
+		}
+		$('.banner-item').addClass(`width-${per}`);
+		$('.banner-item').attr('_per', `${per}`);
+	});
+}
+
 function main() {
 	// Activate all the event handlers
 	$(hamburgerMenuHandler);
 	$(bannerPrevHandler);
 	$(bannerNextHandler);
+	$(resizeHandler);
 
 	generateBanner();
 }

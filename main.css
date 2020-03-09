@@ -139,19 +139,19 @@ main > section {
 	width: calc(100% - 10px);
 }
 
-.full-width {
+.width-1 {
 	width: 100%;
 }
 
-.half-width {
+.width-2 {
 	width: calc( 100% / 2 );
 }
 
-.third-width {
+.width-3 {
 	width: calc( 100% / 3 );
 }
 
-.quarter-width {
+.width-4 {
 	width: calc( 100% / 4 );
 }
 
