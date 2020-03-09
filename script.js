@@ -41,6 +41,7 @@
 			per = 3;
 		else if ( width >= 640 )
 			per = 2;
+		// Placeholder HTML to test the banner.
 		html += `<div _idx=${i} _per=${per} class="banner-item width-${per} banner-item-${(i%2)? "even" : "odd"}"><p style="text-align:center;font-size: 2.0rem;color: white">${i}</p></div>`;
 	}
 	$('.banner-slider').prepend(html);
