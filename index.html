@@ -17,22 +17,31 @@
 		<div class="bgnd-header"></div>
 		<header>
 			<h1>Ted Alff, Programmer</h1>
+			<nav>
+				<!-- Hamburger on smaller screens -->
+				<a href="#" class="menu hamburger-menu"><i class="fas fa-bars"></i></a>
+				<!-- Menu on larger screens -->
+				<ul class="menu text-menu">
+					<li><a href="bio.html">Bio</a></li>
+					<li><a href="projects.html">Projects</a></li>
+					<li><a href="contact.html">Contact</a></li>
+				</ul>
+			</nav>
 		</header>
 	</div>
-	<nav>
-		<!-- Menu on larger screens -->
-		<a href="#" class="menu"><i class="fas fa-bars"></i></a>
-		<ul>
-			<li><a href="bio.html">Bio</a></li>
-			<li><a href="projects.html">Projects</a></li>
-			<li><a href="contact.html">Contact</a></li>
-		</ul>
-	</nav>
 	<div class="banner">
 		<!--Populated by script.js-->
+		<p>Projects slideshow</p>
+		<button class="btn-arrow" id="banner-prev"><i class="fas fa-chevron-left"></i></button>
+		<button class="btn-arrow" id="banner-next"><i class="fas fa-chevron-right"></i></button>
 	</div>
 	<main>
-		<!-- Something will go here... -->
+		<section class="" id="articles">
+			<h2>What I'm Up To</h2>
+		</section>
+		<section class="" id="around-web">
+			<h2>Around the Web</h2>
+		</section>
 	</main>
 	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 	<script src="script.js"></script>

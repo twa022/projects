@@ -2,3 +2,154 @@
 	box-sizing: border-box;
 }
 
+body {
+	height: 100%;
+}
+
+header {
+	position: relative;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
+	width: 90%;
+	max-width: 900px;
+	height: 5.0rem;
+	left: 50%;
+	transform: translateX(-50%);
+	border: black solid 2px;
+	/*background: linear-gradient(217deg, rgba(200,0,0,.8), rgba(200,0,0,0) 70.71%),
+	linear-gradient(127deg, rgba(0,200,0,.8), rgba(0,200,0,0) 70.71%),
+	linear-gradient(336deg, rgba(0,0,200,.8), rgba(0,0,200,0) 70.71%);
+	color: white; */
+	padding-left: 20px;
+	padding-right: 20px;
+	margin-top: 20px;
+	margin-bottom: 20px;
+	/*border-top-left-radius: 40px;
+	border-bottom-right-radius: 40px;
+	border-top-right-radius: 20px;
+	border-bottom-left-radius: 20px;*/
+}
+
+header * {
+	display: inline-block;
+}
+
+nav {
+	text-align: right;
+	font-size: 1.4rem;
+}
+
+nav > ul {
+	display: none;
+}
+
+nav li {
+	list-style: none;
+}
+
+nav li:not(:nth-child(1))::before {
+	content: "| ";
+}
+
+nav a {
+	text-decoration: none;
+	color: black;
+}
+
+.banner {
+	position: relative;
+	left: 50%;
+	transform: translateX(-50%);
+	width: 90%;
+	max-width: 900px;
+	height: 140px;
+	border: black solid 2px;
+	margin-bottom: 20px;
+}
+
+.banner > p {
+	margin: 0;
+	padding: 0;
+	font-size: 1.2rem;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+}
+
+.btn-arrow {
+	position: absolute;
+	text-align: center;
+	border: solid black 2px;
+	background-color: white;
+	color: black;
+	font-weight: bolder;
+	padding: 6px;
+	margin: 0;
+	width: 40px;
+	height: 40px;
+	border-radius: 100%;
+}
+
+.btn-arrow > i {
+	margin: 0;
+	padding: 0;
+}
+
+#banner-prev {
+	left: 0;
+	top: 50%;
+	transform: translate(-50%, -50%);
+}
+
+#banner-next {
+	right: 0;
+	top: 50%;
+	transform: translate(50%, -50%);
+}
+
+main {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	justify-content: flex-start;
+	border: black 2px solid;
+	width: 90%;
+	max-width: 900px;
+	min-height: 500px;
+	position: relative;
+	left: 50%;
+	transform: translateX(-50%);
+	margin-bottom: 20px;
+}
+
+main > section {
+	margin: 5px;
+	border: black 2px solid;
+	width: calc(100% - 10px);
+}
+
+@media screen and ( min-width: 800px ) {
+	main {
+		flex-direction: row;
+		justify-content: space-between;
+	}
+
+	main > section:nth-child(1) {
+		flex: 3 3;
+	}
+
+	main > section:nth-child(2) {
+		flex: 1 1;
+	}
+	
+	nav > ul {
+		display: inline-block;
+	}
+
+	nav > .hamburger-menu {
+		display: none;
+	}
+}
