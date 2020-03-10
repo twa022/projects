@@ -17,7 +17,7 @@ html {
 	background-size: auto 100%;
 	background-position: center top;
 	display: inline-block;
-	position: absolute;
+	position: fixed;
 	left: 0;
 	right: 0;
 }
