@@ -3,7 +3,7 @@
 /********************************
  *           GLOBALS            *
  ********************************/
-
+let TIMER;
 
 /********************************
  *          FUNCTIONS           *
@@ -49,6 +49,40 @@
 	$('.banner-slider').prepend(html);
  }
 
+ function slideNext() {
+	console.log('sliding to next');
+	stopSlideshow();
+	$('.banner-slider').animate(
+		{ left: `-=${100/Number($('.banner-item:first-child').attr('_per'))}%` },
+		1200, 
+		function() {
+			$('.banner-item:last-child').after($('.banner-item:first-child'));
+			$('.banner-slider').css({'left': '0%'});
+		}
+	);
+	startSlideshow();
+}
+
+function slidePrev() {
+	console.log('sliding to previous');
+	stopSlideshow();
+	$('.banner-item:first-child').before($('.banner-item:last-child'));
+	$('.banner-slider').css({'left': `-${100/Number($('.banner-item:first-child').attr('_per'))}%`});
+	$('.banner-slider').animate(
+		{ left: `+=${100/Number($('.banner-item:first-child').attr('_per'))}%` },
+		1200, 
+		function() { $('.banner-slider').css('left', '0%'); }
+	);
+	startSlideshow();
+}
+
+function startSlideshow() {
+	TIMER = setInterval( function() { slideNext(); }, 10000 );
+}
+
+function stopSlideshow() {
+	clearInterval( TIMER );
+}
 
 /********************************
  *        EVENT HANDLERS        *
@@ -64,25 +98,14 @@ function hamburgerMenuHandler() {
 function bannerNextHandler() {
 	$('#banner-next').click( function( event ) {
 		console.log('banner-next');
-		$('.banner-slider').animate({
-			left: `-=${100/Number($('.banner-item:first-child').attr('_per'))}%`
-		}, 1200, function() {
-			$('.banner-item:last-child').after($('.banner-item:first-child'));
-			$('.banner-slider').css({'left': '0%'});
-		} );
+		slideNext();
 	});
 }
 
 function bannerPrevHandler() {
 	$('#banner-prev').click( function( event ) {
 		console.log('banner-prev');
-		$('.banner-item:first-child').before($('.banner-item:last-child'));
-		$('.banner-slider').css({'left': `-${100/Number($('.banner-item:first-child').attr('_per'))}%`});
-	$('.banner-slider').animate({
-			left: `+=${100/Number($('.banner-item:first-child').attr('_per'))}%`
-		}, 1200, function() {
-			$('.banner-slider').css('left', '0%');
-		} );
+		slidePrev();
 	});
 }
 
@@ -110,6 +133,8 @@ function main() {
 	$(resizeHandler);
 
 	generateBanner();
+
+	startSlideshow();
 }
 
 main();
