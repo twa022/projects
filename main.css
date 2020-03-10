@@ -1,9 +1,32 @@
 * {
 	box-sizing: border-box;
+	font-family: 'PT Sans', sans-serif;
+}
+
+html {
+	height: 100%;
+}
+
+.background {
+	background-image: linear-gradient( rgba( 100, 100, 100, 0.8 ), rgba( 200, 200, 200, 0.8) ),
+				url("https://images.unsplash.com/photo-1550645612-83f5d594b671?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80");
+	height: 100%;
+	margin-top: -20px;
+	filter: blur(2px);
+	background-repeat: none;
+	background-size: auto 100%;
+	background-position: center top;
+	display: inline-block;
+	position: fixed;
+	left: 0;
+	right: 0;
 }
 
 body {
-	height: 100%;
+	margin:0;
+	min-height: 100%;
+	min-width: 320px;
+	padding-top: 20px;
 }
 
 header {
@@ -13,7 +36,7 @@ header {
 	align-items: center;
 	justify-content: space-between;
 	width: 90%;
-	max-width: 900px;
+	max-width: 1100px;
 	height: 5.0rem;
 	left: 50%;
 	transform: translateX(-50%);
@@ -24,16 +47,21 @@ header {
 	color: white; */
 	padding-left: 20px;
 	padding-right: 20px;
-	margin-top: 20px;
+	/*margin-top: 20px;*/
 	margin-bottom: 20px;
-	/*border-top-left-radius: 40px;
+}
+
+header, .banner, .slider-container, main, main > section, .background {
+	background-color: rgba( 200, 200, 200, 0.8);
+	border-top-left-radius: 40px;
 	border-bottom-right-radius: 40px;
 	border-top-right-radius: 20px;
-	border-bottom-left-radius: 20px;*/
+	border-bottom-left-radius: 20px;
 }
 
 header * {
 	display: inline-block;
+
 }
 
 nav {
@@ -63,10 +91,18 @@ nav a {
 	left: 50%;
 	transform: translateX(-50%);
 	width: 90%;
-	max-width: 900px;
-	height: 140px;
+	max-width: 1100px;
+	height: 200px;
 	border: black solid 2px;
 	margin-bottom: 20px;
+}
+
+.slider-container {
+	position: relative;
+	width: 100%;
+	height: 100%;
+	white-space: nowrap;
+	overflow: hidden;
 }
 
 .banner > p {
@@ -115,10 +151,10 @@ main {
 	flex-direction: column;
 	align-items: flex-start;
 	justify-content: flex-start;
+	background-color: rgba( 200, 200, 200, 0.8);
 	border: black 2px solid;
 	width: 90%;
-	max-width: 900px;
-	height: 50px;
+	max-width: 1100px;
 	min-height: 500px;
 	position: relative;
 	left: 50%;
@@ -131,6 +167,56 @@ main > section {
 	margin: 5px;
 	border: black 2px solid;
 	width: calc(100% - 10px);
+	padding-left: 5px;
+	padding-right: 5px;
+}
+
+main > section > h2 {
+	text-align: center;
+}
+
+main > section div:not(:nth-child(2)) {
+	border-top: rgba(100, 100, 100, 0.8) solid 2px;
+}
+
+.width-1 {
+	width: 100%;
+}
+
+.width-2 {
+	width: calc( 100% / 2 );
+}
+
+.width-3 {
+	width: calc( 100% / 3 );
+}
+
+.width-4 {
+	width: calc( 100% / 4 );
+}
+
+.banner-slider {
+	position: absolute;
+	width: 100%;
+	left: 0;
+	top: 0;
+	margin: 0;
+	padding: 0;
+	height: 100%;
+}
+
+.banner-item {
+	display: inline-block;
+	height: 100%;
+}
+
+/* Since we continually reorder the banner items; we have to assigne them even / odd when created */
+.banner-item-even {
+	background-color: blue;
+}
+
+.banner-item-odd {
+	background-color: red;
 }
 
 @media screen and ( min-width: 800px ) {
