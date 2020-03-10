@@ -34,16 +34,17 @@
 	}
 	*/
 	let html = "";
-	for ( let i = 0 ; i < 4 ; i++ ) {
-		let per = 1;
-		let width = $('body').width();
-		if ( width >= 900 )
-			per = 3;
-		else if ( width >= 640 )
-			per = 2;
+	let per = 1;
+	let width = $('body').width();
+	if ( width >= 900 )
+		per = 3;
+	else if ( width >= 640 )
+		per = 2;
+	for ( let i = 0 ; i < 3 ; i++ ) {
 		// Placeholder HTML to test the banner.
 		html += `<div _idx=${i} _per=${per} class="banner-item width-${per} banner-item-${(i%2)? "even" : "odd"}"><p style="text-align:center;font-size: 2.0rem;color: white">${i}</p></div>`;
 	}
+	html += `<div _idx=3 _per=${per} class="banner-item width-${per} banner-item-${(3%2)? "even" : "odd"}" style="text-align:center"><p style="text-align:center;font-size: 2.0rem;color: white">All Projects <i style="text-align:center;font-size: 2.0rem;color: white" class="fas fa-list"></i></p></div>`;
 	$('.banner-slider').prepend(html);
  }
 

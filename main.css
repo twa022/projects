@@ -8,10 +8,15 @@ html {
 }
 
 .background {
-	background: linear-gradient( rgba( 100, 100, 100, 0.8 ), rgba( 200, 200, 200, 0.8) ),
+	background-image: linear-gradient( rgba( 100, 100, 100, 0.8 ), rgba( 200, 200, 200, 0.8) ),
 				url("https://images.unsplash.com/photo-1550645612-83f5d594b671?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80");
 	height: 100%;
 	margin-top: -20px;
+	filter: blur(2px);
+	background-repeat: none;
+	background-size: auto 100%;
+	background-position: center top;
+	display: inline-block;
 	position: absolute;
 	left: 0;
 	right: 0;
@@ -19,7 +24,7 @@ html {
 
 body {
 	margin:0;
-	height: 100%;
+	min-height: 100%;
 	min-width: 320px;
 	padding-top: 20px;
 }
@@ -46,7 +51,7 @@ header {
 	margin-bottom: 20px;
 }
 
-header, .banner, .slider-container, main, main > section {
+header, .banner, .slider-container, main, main > section, .background {
 	background-color: rgba( 200, 200, 200, 0.8);
 	border-top-left-radius: 40px;
 	border-bottom-right-radius: 40px;
