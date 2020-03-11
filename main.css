@@ -1,6 +1,6 @@
 * {
 	box-sizing: border-box;
-	font-family: 'PT Sans', sans-serif;
+	font-family: 'PT Serif', serif;
 }
 
 html {
@@ -53,10 +53,10 @@ header {
 
 header, .banner, .slider-container, main, main > section, .background {
 	background-color: rgba( 200, 200, 200, 0.8);
-	border-top-left-radius: 40px;
+	/*border-top-left-radius: 40px;
 	border-bottom-right-radius: 40px;
 	border-top-right-radius: 20px;
-	border-bottom-left-radius: 20px;
+	border-bottom-left-radius: 20px;*/
 }
 
 header * {

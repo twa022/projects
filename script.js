@@ -43,9 +43,9 @@ let TIMER;
 		per = 2;
 	for ( let i = 0 ; i < 3 ; i++ ) {
 		// Placeholder HTML to test the banner.
-		html += `<div _idx=${i} _per=${per} class="banner-item width-${per} banner-item-${(i%2)? "even" : "odd"}"><p style="text-align:center;font-size: 2.0rem;color: white">${i}</p></div>`;
+		html += `<a href="test.html" _idx=${i} _per=${per} class="banner-item width-${per} banner-item-${(i%2)? "even" : "odd"}"><p style="text-align:center;font-size: 2.0rem;color: white">${i}</p></a>`;
 	}
-	html += `<div _idx=3 _per=${per} class="banner-item width-${per} banner-item-${(3%2)? "even" : "odd"}" style="text-align:center"><p style="text-align:center;font-size: 2.0rem;color: white">All Projects <i style="text-align:center;font-size: 2.0rem;color: white" class="fas fa-list"></i></p></div>`;
+	html += `<a href="projects.html" _idx=3 _per=${per} class="banner-item width-${per} banner-item-${(3%2)? "even" : "odd"}" style="text-align:center"><p style="text-align:center;font-size: 2.0rem;color: white">All Projects <i style="text-align:center;font-size: 2.0rem;color: white" class="fas fa-list"></i></p></a>`;
 	$('.banner-slider').prepend(html);
  }
 
