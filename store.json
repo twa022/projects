@@ -1,4 +1,8 @@
-{ 
+{
+	"bio": {
+		"text": "I am a programmer and I like soup. It is delicious and I eat it most ever day. Sometimes I eat mushroom soup. Sometimes I eat corn chowder. Other times I eat bean kale soup which is very good.",
+		"image": "images/ted.jpg"
+	},
 	"projects": [
 		{
 			"title": "Banana Project",

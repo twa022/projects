@@ -23,6 +23,12 @@ const MAX_LINKS = 3;
 	return true;
  }
 
+
+async function generateBio() {
+	$('.bio-image').html(`<img src=${STORE.bio.image} alt="Ted Alff">`);
+	$('.bio-text').html(STORE.bio.text);
+}
+
 async function generateBanner() {
 	let html = "";
 	for ( let i = 0 ; i < STORE.projects.length ; i++ ) {
@@ -128,9 +134,46 @@ async function loadStore( file ) {
  ********************************/
 
 function hamburgerMenuHandler() {
-	$('.menu').click( function( event ) { 
+	$('.hamburger').click( function( event ) { 
 		event.preventDefault();
-		// slide out menu
+		event.stopPropagation();
+		$('.hamburger-layer').removeClass('no-display');
+		$('.hamburger-menu').css("right", ( $(window).width() - $('header').width() ) / 2 - 20 );
+		$('.hamburger-menu').slideDown();
+	});
+}
+
+function contactLinkHandler() {
+	$('.contact-link').click( function( event ) { 
+		event.preventDefault();
+		event.stopPropagation();
+		$('.hamburger-layer').click();
+		$('.contact-layer').removeClass('no-display');
+		$('.contact').css("right", ( $(window).width() - $('header').width() ) / 2 - 20 );
+		$('.contact').slideDown();
+	});
+}
+
+function bioLinkHandler() {
+	$('.bio-link').click( function( event ) { 
+		event.preventDefault();
+		event.stopPropagation();
+		$('.hamburger-layer').click();
+		$('.bio-layer').removeClass('no-display');
+		$('.bio').css("right", ( $(window).width() - $('header').width() ) / 2 - 20 );
+		$('.bio').slideDown();
+	});
+}
+
+function hamburgerMenuCollapse() {
+	$('.hamburger-layer').click( function( event ) {
+		$('.hamburger-menu').slideUp( function() { $('.hamburger-layer').addClass('no-display'); } );
+	});
+}
+
+function contactLayerCollapse() {
+	$('.contact-layer').click( function( event ) {
+		$('.contact').slideUp( function() { $('.contact-layer').addClass('no-display'); } );
 	});
 }
 
@@ -141,6 +184,12 @@ function bannerNextHandler() {
 	});
 }
 
+function bioCollapse() {
+	$('.bio-layer').click( function( event ) {
+		$('.bio').slideUp( function() { $('.bio-layer').addClass('no-display'); } );
+	});
+}
+
 function bannerPrevHandler() {
 	$('#banner-prev').click( function( event ) {
 		console.log('banner-prev');
@@ -148,11 +197,25 @@ function bannerPrevHandler() {
 	});
 }
 
+function resizeHandler() {
+	$(window).resize( function( event ) {
+		$('.hamburger-menu').css("right", ( $(window).width() - $('header').width() ) / 2 - 20 );
+		$('.contact').css("right", ( $(window).width() - $('header').width() ) / 2 - 20 );
+		$('.hamburger-layer').click();
+	});
+}
+
 async function main() {
 	// Activate all the event handlers
 	$(hamburgerMenuHandler);
+	$(hamburgerMenuCollapse);
+	$(contactLinkHandler);
+	$(contactLayerCollapse);
+	$(bioLinkHandler);
+	$(bioCollapse);
 	$(bannerPrevHandler);
 	$(bannerNextHandler);
+	$(resizeHandler);
 
 	await loadStore( 'store.json' );
 	console.log( STORE.projects[0].title );
@@ -162,6 +225,7 @@ async function main() {
 
 	generateBlog();
 	generateLinks();
+	generateBio();
 }
 
 main();
