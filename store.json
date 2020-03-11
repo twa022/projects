@@ -24,5 +24,33 @@
 			"link": "tofu.html",
 			"text": "Doesn't that tofu look yummy!"
 		}
+	],
+	"blog": [
+		{
+			"title": "Making this awesome site!",
+			"date": "20200311",
+			"link": "index.html",
+			"text": "Some weird issues with the banner, but going good..."
+		},
+		{
+			"title": "Making Soup",
+			"date": "20190311",
+			"link": "blog.html#20190311-2",
+			"text": "Bean and kale soup sure sounds tasty"
+		}
+	],
+	"links": [
+		{
+			"title": "Bean Kale Soup Recipe",
+			"date": "20200311",
+			"link": "https://www.allrecipes.com/recipe/78023/bean-soup-with-kale/",
+			"text": "I use carrots instead of tomatoes"
+		},
+		{
+			"title": "The Fetch API",
+			"date": "20200311",
+			"link": "https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API",
+			"text": "Using fetch to retrieve resources. Read up on async / await too..."
+		}
 	]
 }

@@ -7,6 +7,10 @@ let TIMER;
 
 let STORE;
 
+const MAX_BLOG_LINKS = 3;
+
+const MAX_LINKS = 3;
+
 /********************************
  *          FUNCTIONS           *
  ********************************/
@@ -34,7 +38,29 @@ async function generateBanner() {
 				<div class="banner-item-bgnd" style="background-image: linear-gradient( to bottom, rgba(50, 50, 50, 0.8), rgba( 100, 100, 100, 0.4) ), url('images/all_projects.png');"></div>
 				<div class="banner-item-text"><h2>All Projects</h2> </div></a>`;
 	$('.banner-slider').html(html);
- }
+}
+
+async function generateBlog() {
+	let html = "";
+	for ( let i = 0 ; i < STORE.blog.length && i < MAX_BLOG_LINKS ; i++ ) {
+		// Placeholder HTML to test the banner.
+		html += `<div><a href="${STORE.blog[i].link}" _idx=${i}
+					class="blog-link">
+					<div><h3>${STORE.blog[i].title}</h3>${STORE.blog[i].text}</div></a></div>`;
+	}
+	$('.blog').append(html);
+}
+
+async function generateLinks() {
+	let html = "";
+	for ( let i = 0 ; i < STORE.links.length && i < MAX_LINKS ; i++ ) {
+		// Placeholder HTML to test the banner.
+		html += `<div><a href="${STORE.links[i].link}" _idx=${i}
+					class="link">
+					<div><h3>${STORE.links[i].title}</h3>${STORE.links[i].text}</div></a></div>`;
+	}
+	$('.links').append(html);
+}
 
  function slideNext() {
 	console.log('sliding to next');
@@ -122,8 +148,10 @@ async function main() {
 	console.log( STORE.projects[0].title );
 
 	generateBanner();
-
 	startSlideshow();
+
+	generateBlog();
+	generateLinks();
 }
 
 main();
