@@ -48,6 +48,11 @@ async function generateBlog() {
 					class="blog-link">
 					<div><h3>${STORE.blog[i].title}</h3>${STORE.blog[i].text}</div></a></div>`;
 	}
+	if ( STORE.blog.length > MAX_BLOG_LINKS ) {
+		html += `<div><a href="blog.html" _idx=${MAX_BLOG_LINKS}
+		         class="blog-link">
+		         <div><h3>All Blog Entries</h3></div></a></div>`;
+	}
 	$('.blog').append(html);
 }
 
@@ -55,9 +60,14 @@ async function generateLinks() {
 	let html = "";
 	for ( let i = 0 ; i < STORE.links.length && i < MAX_LINKS ; i++ ) {
 		// Placeholder HTML to test the banner.
-		html += `<div><a href="${STORE.links[i].link}" _idx=${i}
+		html += `<div><a href="${STORE.links[i].link}" _idx=${i} target="_blank rel="noopener"
 					class="link">
 					<div><h3>${STORE.links[i].title}</h3>${STORE.links[i].text}</div></a></div>`;
+	}
+	if ( STORE.links.length > MAX_LINKS ) {
+		html += `<div><a href="links.html" _idx=${MAX_LINKS}"
+		         class="link">
+				 <div><h3>All Links</h3></div></a></div>`;
 	}
 	$('.links').append(html);
 }
