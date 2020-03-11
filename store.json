@@ -1,0 +1,28 @@
+{ 
+	"projects": [
+		{
+			"title": "Banana Project",
+			"date": "20190311",
+			"image": "images/banana.jpg",
+			"fontColor": "pink",
+			"link": "banana.html",
+			"text": "Bananas have potassium!"
+		},
+		{
+			"title": "Apple Project",
+			"date": "20190310",
+			"image": "images/apple.jpg",
+			"fontColor": "white",
+			"link": "apples.html",
+			"text": "Apples can be green or red???"
+		},
+		{
+			"title": "Tofu for Days",
+			"date": "20190309",
+			"image": "images/tofu.png",
+			"fontColor": "cyan",
+			"link": "tofu.html",
+			"text": "Doesn't that tofu look yummy!"
+		}
+	]
+}

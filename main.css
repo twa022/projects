@@ -105,7 +105,7 @@ nav a {
 	overflow: hidden;
 }
 
-.banner > p {
+/*.banner > p {
 	margin: 0;
 	padding: 0;
 	font-size: 1.2rem;
@@ -113,7 +113,7 @@ nav a {
 	left: 50%;
 	top: 50%;
 	transform: translate(-50%, -50%);
-}
+}*/
 
 .btn-arrow {
 	position: absolute;
@@ -179,22 +179,6 @@ main > section div:not(:nth-child(2)) {
 	border-top: rgba(100, 100, 100, 0.8) solid 2px;
 }
 
-.width-1 {
-	width: 100%;
-}
-
-.width-2 {
-	width: calc( 100% / 2 );
-}
-
-.width-3 {
-	width: calc( 100% / 3 );
-}
-
-.width-4 {
-	width: calc( 100% / 4 );
-}
-
 .banner-slider {
 	position: absolute;
 	width: 100%;
@@ -207,7 +191,45 @@ main > section div:not(:nth-child(2)) {
 
 .banner-item {
 	display: inline-block;
+	position: relative;
+	color: white;
+	text-decoration: none;
+	white-space: normal;
+	text-align:center;
+	font-size: 1.8rem;
+	margin: 0;
+	padding: 0;
 	height: 100%;
+	width: 100%;
+}
+
+.banner-item-bgnd {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%; 
+	background-image: linear-gradient( to bottom, rgba(50, 50, 50, 0.8), rgba( 100, 100, 100, 0.4) );
+	background-repeat: none;
+	background-size: 100% auto;
+	background-position: center;
+}
+
+.banner-item-text {
+	position: absolute;
+	text-align: center;
+	top: 0;
+	padding-top: 10px;
+	left: 20px;
+	width: calc( 100% - 40px );
+}
+
+.banner-item-text > h2 {
+	font-size: 2.0rem;
+	margin-top: 2px;
+	margin-bottom: 2px;
+	padding-bottom: 8px;
+	border-bottom: lightgray 1px solid;
 }
 
 /* Since we continually reorder the banner items; we have to assigne them even / odd when created */
@@ -217,6 +239,12 @@ main > section div:not(:nth-child(2)) {
 
 .banner-item-odd {
 	background-color: red;
+}
+
+@media screen and ( min-width: 640px ) {
+	.banner-item {
+		width: 50%;
+	}
 }
 
 @media screen and ( min-width: 800px ) {
@@ -248,5 +276,11 @@ main > section div:not(:nth-child(2)) {
 
 	section > h2 {
 		text-align: center;
+	}
+}
+
+@media screen and ( min-width: 900px ) {
+	.banner-item {
+		width: calc( 100% / 3 );
 	}
 }
