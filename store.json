@@ -5,12 +5,12 @@
 	},
 	"projects": [
 		{
-			"title": "Banana Project",
+			"title": "Quiz",
 			"date": "20190311",
-			"image": "images/banana.jpg",
+			"image": "images/quiz-app.png",
 			"fontColor": "pink",
-			"link": "banana.html",
-			"text": "Bananas have potassium!"
+			"link": "https://github.com/twa022/quiz-app",
+			"text": "A modular trivia app"
 		},
 		{
 			"title": "Apple Project",
