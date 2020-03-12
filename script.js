@@ -33,14 +33,12 @@ async function generateBanner() {
 	let html = "";
 	for ( let i = 0 ; i < STORE.projects.length ; i++ ) {
 		// Placeholder HTML to test the banner.
-		html += `<a href="${STORE.projects[i].link}" _idx=${i}
-					style="color: ${STORE.projects[i].fontColor}" 
-					class="banner-item" _class="banner-item-${(i%2)? "even" : "odd"}">
+		html += `<a href="${STORE.projects[i].link}" _idx=${i} class="banner-item"
+					style="color: ${STORE.projects[i].fontColor}">
 					<div class="banner-item-bgnd" style="background-image: linear-gradient( to bottom, rgba(50, 50, 50, 0.8), rgba( 100, 100, 100, 0.4) ), url('${STORE.projects[i].image}');"></div>
 					<div class="banner-item-text"><h2>${STORE.projects[i].title}</h2>${STORE.projects[i].text}</div></a>`;
 	}
-	html += `<a href="projects.html" _idx=${STORE.projects.length} 
-				class="banner-item" _class="banner-item-${(3%2)? "even" : "odd"}">
+	html += `<a href="projects.html" _idx=${STORE.projects.length} class="banner-item">
 				<div class="banner-item-bgnd" style="background-image: linear-gradient( to bottom, rgba(50, 50, 50, 0.8), rgba( 100, 100, 100, 0.4) ), url('images/all_projects.png');"></div>
 				<div class="banner-item-text"><h2>All Projects</h2> </div></a>`;
 	$('.banner-slider').html(html);
@@ -129,6 +127,17 @@ async function loadStore( file ) {
 	}
 }
 
+function overlayBoxIn( className ) {
+	$('.overlay-layer').fadeIn();
+	$('.hamburger-menu').fadeOut();
+	$(`.${className}`).css("right", ( $(window).width() - $('header').width() ) / 2 - 20 );
+	$(`.${className}`).slideDown();
+}
+
+function overlayOut() {
+	$('.overlay-box').slideUp( function() { $('.overlay-layer').fadeOut(); } );
+}
+
 /********************************
  *        EVENT HANDLERS        *
  ********************************/
@@ -137,20 +146,21 @@ function hamburgerMenuHandler() {
 	$('.hamburger').click( function( event ) { 
 		event.preventDefault();
 		event.stopPropagation();
-		$('.hamburger-layer').removeClass('no-display');
-		$('.hamburger-menu').css("right", ( $(window).width() - $('header').width() ) / 2 - 20 );
-		$('.hamburger-menu').slideDown();
+		overlayBoxIn( 'hamburger-menu');
 	});
+}
+
+function homeLinkHandler() {
+	$('.home-link').click( function( event ) {
+		overlayOut();
+	})
 }
 
 function contactLinkHandler() {
 	$('.contact-link').click( function( event ) { 
 		event.preventDefault();
 		event.stopPropagation();
-		$('.hamburger-layer').click();
-		$('.contact-layer').removeClass('no-display');
-		$('.contact').css("right", ( $(window).width() - $('header').width() ) / 2 - 20 );
-		$('.contact').slideDown();
+		overlayBoxIn( 'contact-overlay');
 	});
 }
 
@@ -158,22 +168,13 @@ function bioLinkHandler() {
 	$('.bio-link').click( function( event ) { 
 		event.preventDefault();
 		event.stopPropagation();
-		$('.hamburger-layer').click();
-		$('.bio-layer').removeClass('no-display');
-		$('.bio').css("right", ( $(window).width() - $('header').width() ) / 2 - 20 );
-		$('.bio').slideDown();
+		overlayBoxIn( 'bio' );
 	});
 }
 
-function hamburgerMenuCollapse() {
-	$('.hamburger-layer').click( function( event ) {
-		$('.hamburger-menu').slideUp( function() { $('.hamburger-layer').addClass('no-display'); } );
-	});
-}
-
-function contactLayerCollapse() {
-	$('.contact-layer').click( function( event ) {
-		$('.contact').slideUp( function() { $('.contact-layer').addClass('no-display'); } );
+function overlayOutHandler() {
+	$('.overlay-layer').click( function( event ) {
+		overlayOut();
 	});
 }
 
@@ -181,12 +182,6 @@ function bannerNextHandler() {
 	$('#banner-next').click( function( event ) {
 		console.log('banner-next');
 		slideNext();
-	});
-}
-
-function bioCollapse() {
-	$('.bio-layer').click( function( event ) {
-		$('.bio').slideUp( function() { $('.bio-layer').addClass('no-display'); } );
 	});
 }
 
@@ -201,18 +196,18 @@ function resizeHandler() {
 	$(window).resize( function( event ) {
 		$('.hamburger-menu').css("right", ( $(window).width() - $('header').width() ) / 2 - 20 );
 		$('.contact').css("right", ( $(window).width() - $('header').width() ) / 2 - 20 );
-		$('.hamburger-layer').click();
+		$('.bio').css("right", ( $(window).width() - $('header').width() ) / 2 - 20 );
+		//$('.overlay-layer').click();
 	});
 }
 
 async function main() {
 	// Activate all the event handlers
 	$(hamburgerMenuHandler);
-	$(hamburgerMenuCollapse);
+	$(homeLinkHandler);
 	$(contactLinkHandler);
-	$(contactLayerCollapse);
 	$(bioLinkHandler);
-	$(bioCollapse);
+	$(overlayOutHandler);
 	$(bannerPrevHandler);
 	$(bannerNextHandler);
 	$(resizeHandler);

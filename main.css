@@ -3,9 +3,9 @@
 	font-family: 'PT Serif', serif;
 }
 
-html {
+/*html {
 	height: 100%;
-}
+}*/
 
 .background {
 	background-image: linear-gradient( rgba( 100, 100, 100, 0.8 ), rgba( 200, 200, 200, 0.8) ),
@@ -24,6 +24,7 @@ html {
 
 body {
 	margin:0;
+	height: 100%;
 	min-height: 100%;
 	min-width: 320px;
 	padding-top: 20px;
@@ -93,28 +94,17 @@ nav a {
 	color: black;
 }
 
-.no-display {
-	display: none;
-}
-
-.layer {
-	position: absolute;
+.overlay-layer {
+	position: fixed;
 	left: 0;
 	top: 0;
 	width: 100%;
 	height: 100%;
-	/*background-color: rgba( 100, 100, 100, 0.4 );*/
+	background: rgba( 50, 50, 50, 0.8 );
 	z-index: 10;
 }
 
-.layer-bgnd {
-	position: relative;
-	width: 100%;
-	height: 100%;
-	background: rgba( 50, 50, 50, 0.4 );
-}
-
-.layer-popup {
+.overlay-box {
 	position: absolute;
 	right: 20px; /*overwritten by js */
 	top: 120px;
@@ -124,31 +114,37 @@ nav a {
 	text-align: left;
 	padding: 8px;
 	min-width: 125px;
-	display: none;
+	z-index: 20;
 }
 
-.layer-popup li {
+.overlay-box li {
 	list-style: none;
 	margin-bottom: 4px;
 	margin-top: 4px;
 }
 
-.layer-popup a {
+.overlay-box a {
 	text-decoration: none;
 	color: black;
 	font-size: 1.6rem;
 }
 
-ul.contact {
-	display: flex !important;
-	flex-direction: row;
-	width: 300px;
+.contact-overlay {
+	width: 288px;
 	padding: 20px;
-	align-items: flex-start;
-	justify-content: space-evenly;
 }
 
-.contact li {
+.contact {
+	width: 100%;
+	display: flex; /* !important; */
+	flex-direction: row;
+	align-items: flex-start;
+	justify-content: space-evenly;
+	padding: 0;
+	margin: 0;
+}
+
+.contact > li {
 	display: inline-block;
 	font-size: 1.8rem;
 	padding-left: 6px;
@@ -156,8 +152,8 @@ ul.contact {
 }
 
 .bio {
-	min-width: 300px;
-	max-width: 600px;
+	min-width: 288px;
+	max-width: 90%;
 	padding: 20px;
 	font-size: 1.4rem;
 	line-height: 1.4;
@@ -187,16 +183,6 @@ ul.contact {
 	white-space: nowrap;
 	overflow: hidden;
 }
-
-/*.banner > p {
-	margin: 0;
-	padding: 0;
-	font-size: 1.2rem;
-	position: absolute;
-	left: 50%;
-	top: 50%;
-	transform: translate(-50%, -50%);
-}*/
 
 .btn-arrow {
 	position: absolute;
@@ -331,13 +317,8 @@ main > section > div:not(:last-child) {
 	border-bottom: lightgray 1px solid;
 }
 
-/* Since we continually reorder the banner items; we have to assigne them even / odd when created */
-.banner-item-even {
-	background-color: blue;
-}
-
-.banner-item-odd {
-	background-color: red;
+.no-display {
+	display: none;
 }
 
 @media screen and ( min-width: 640px ) {
@@ -385,5 +366,9 @@ main > section > div:not(:last-child) {
 @media screen and ( min-width: 900px ) {
 	.banner-item {
 		width: calc( 100% / 3 );
+	}
+
+	.bio {
+		max-width: 810px;
 	}
 }
