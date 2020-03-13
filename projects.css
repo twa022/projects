@@ -1,0 +1,33 @@
+.project {
+	position: relative;
+	float: left;
+	width: 100%;
+}
+
+.project img {
+	display: inline-block;
+	width: 30%;
+	min-width: 150px;
+	float: left;
+	margin-right: 12px;
+	margin-bottom: 12px;
+}
+
+.project h3 {
+	font-size: 1.6rem;
+	margin-bottom: 10px;
+	position: absolute;
+	top: 5px;
+	left: 0;
+	margin-left: 15%;
+	transform: translateX(-50%);
+}
+
+.project {
+	padding-top: calc( 1.6rem + 20px );
+	font-size: 1.4rem;
+}
+
+.project a {
+	text-decoration: none;
+}
