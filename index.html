@@ -14,44 +14,7 @@
 	<link href="https://fonts.googleapis.com/css?family=PT+Serif|Roboto&display=swap" rel="stylesheet">
 </head>
 <body>
-	<div class='background'></div>
-	<div class="ctr-header">
-		<div class="bgnd-header"></div>
-		<header>
-			<h1>Ted Alff, Programmer</h1>
-			<nav>
-				<!-- Hamburger on smaller screens -->
-				<a href="#" class="menu hamburger"><i class="fas fa-bars"></i></a>
-				<!-- Menu on larger screens -->
-				<ul class="menu text-menu">
-					<li><a class="home-link" href="#">Home</a></li>
-					<li><a class="bio-link" href="bio.html">Bio</a></li>
-					<li><a href="projects.html">Projects</a></li>
-					<li><a class="contact-link" href="contact.html">Contact</a></li>
-				</ul>
-			</nav>
-		</header>
-	</div>
-	<div class="overlay-layer no-display"></div>
-	<ul class="menu hamburger-menu overlay-box no-display">
-		<li><a class="home-link" href="#">Home</a></li>
-		<li><a class="bio-link" href="bio.html">Bio</a></li>
-		<li><a href="projects.html">Projects</a></li>
-		<li><a class="contact-link" href="contact.html">Contact</a></li>
-	</ul>
-	<div class="contact-overlay overlay-box no-display">
-		<!--<div class="contact-ctr">-->
-			<ul class="contact">
-				<li><a href="#"><i class="far fa-envelope"></i></a></li>
-				<li><a href="https://github.com/twa022/"><i class="fab fa-github"></i></a></li>
-				<li><a href="#"><i class="fab fa-linkedin"></i></a></li>
-			</ul>
-		<!--</div>-->
-	</div>
-	<div class="bio overlay-box no-display">
-		<div class="bio-image"></div>
-		<div class="bio-text"></div>
-	</div>
+	{% include common.html %}
 	<div class="banner">
 		<div class="slider-container">
 			<div class="banner-slider">
