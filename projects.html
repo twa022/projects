@@ -18,26 +18,15 @@ title: Ted Alff, Programmer
 </head>
 <body>
 	{% include common.html %}
-	<div class="banner">
-		<div class="slider-container">
-			<div class="banner-slider">
-				<!--Populated by script.js-->
-			</div>
-		</div>
-		<button class="btn-pause" id="pause-slideshow"><i class="fas fa-pause"></i></button>
-		<button class="btn-arrow" id="banner-prev"><i class="fas fa-chevron-left"></i></button>
-		<button class="btn-arrow" id="banner-next"><i class="fas fa-chevron-right"></i></button>
-	</div>
 	<main>
-		<section class="blog" id="blog">
-			<h2>What I'm Up To</h2>
-		</section>
-		<section class="links" id="around-web">
-			<h2>Around the Web</h2>
+		<section class="projects" id="projects">
+			<h2>My projects</h2>
 		</section>
 	</main>
 	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 	<script src="common.js"></script>
-	<script src="index.js"></script>
+	<script>
+		commonMain();
+	</script>
 </body>
 </html>
