@@ -5,7 +5,7 @@ function displayProjects() {
 	STORE.projects.forEach( function( project ) {
 		html += `
 		<div class="project">
-			<h3><a href="${project.link}>${project.title}</a></h3>
+			<h3><a href="${project.link}">${project.title}</a></h3>
 			<img src="${project.image}" alt="${project.title} picture">
 			${project.text}
 		</div>`
