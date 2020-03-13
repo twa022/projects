@@ -78,6 +78,7 @@ async function generateLinks() {
 
  function slideNext() {
 	console.log('sliding to next');
+	let restartSlideshow = $('.btn-pause').find('i').attr('class').includes('fa-pause')
 	stopSlideshow();
 	$('.banner-slider').animate(
 		{ left: `-=${Number($('.banner-item:first-child').width())}px` },
@@ -87,11 +88,12 @@ async function generateLinks() {
 			$('.banner-slider').css({'left': '0%'});
 		}
 	);
-	startSlideshow();
+	if ( restartSlideshow ) startSlideshow();
 }
 
 function slidePrev() {
 	console.log('sliding to previous');
+	let restartSlideshow = $('.btn-pause').find('i').attr('class').includes('fa-pause')
 	stopSlideshow();
 	let width = Number($('.banner-item:first-child').width());
 	$('.banner-item:first-child').before($('.banner-item:last-child'));
@@ -101,15 +103,21 @@ function slidePrev() {
 		1200, 
 		function() { $('.banner-slider').css('left', '0%'); }
 	);
-	startSlideshow();
+	if ( restartSlideshow ) startSlideshow();
 }
 
 function startSlideshow() {
+	console.log('Starting slideshow');
 	TIMER = setInterval( function() { slideNext(); }, 10000 );
 }
 
 function stopSlideshow() {
+	console.log('Stopping slideshow');
 	clearInterval( TIMER );
+}
+
+function toggleSlideshow( start ) {
+	( start ) ? startSlideshow() : stopSlideshow();
 }
 
 async function loadStore( file ) {
@@ -130,12 +138,13 @@ async function loadStore( file ) {
 function overlayBoxIn( className ) {
 	$('.overlay-layer').fadeIn();
 	$('.hamburger-menu').fadeOut();
-	$(`.${className}`).css("right", ( $(window).width() - $('header').width() ) / 2 - 20 );
-	$(`.${className}`).slideDown();
+	let pad = Number($('header').css('padding-right').replace('px', ''));
+	$(`.${className}`).css("right", ( $(window).width() - $('header').width() ) / 2 - pad );
+	$(`.${className}`).fadeIn();
 }
 
 function overlayOut() {
-	$('.overlay-box').slideUp( function() { $('.overlay-layer').fadeOut(); } );
+	$('.overlay-box').fadeOut( function() { $('.overlay-layer').fadeOut(); } );
 }
 
 /********************************
@@ -194,11 +203,23 @@ function bannerPrevHandler() {
 
 function resizeHandler() {
 	$(window).resize( function( event ) {
-		$('.hamburger-menu').css("right", ( $(window).width() - $('header').width() ) / 2 - 20 );
-		$('.contact').css("right", ( $(window).width() - $('header').width() ) / 2 - 20 );
-		$('.bio').css("right", ( $(window).width() - $('header').width() ) / 2 - 20 );
+		let pad = Number($('header').css('padding-right').replace('px', ''));
+		let rightOffset = ( $(window).width() - $('header').width() ) / 2 - pad;
+		$('.hamburger-menu').css("right", rightOffset );
+		$('.contact').css("right", rightOffset );
+		$('.bio').css("right", rightOffset );
 		//$('.overlay-layer').click();
 	});
+}
+
+function pauseSlideshowHandler() {
+	$('.btn-pause').click( function( event ) {
+		event.stopPropagation();
+		console.log( $('.btn-pause').find('i').attr('class') );
+		toggleSlideshow( $('.btn-pause').find('i').attr('class').includes('fa-play') );
+		$('.btn-pause').find('i').toggleClass('fa-pause');
+		$('.btn-pause').find('i').toggleClass('fa-play');
+	})
 }
 
 async function main() {
@@ -210,6 +231,7 @@ async function main() {
 	$(overlayOutHandler);
 	$(bannerPrevHandler);
 	$(bannerNextHandler);
+	$(pauseSlideshowHandler);
 	$(resizeHandler);
 
 	await loadStore( 'store.json' );

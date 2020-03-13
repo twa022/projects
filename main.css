@@ -215,6 +215,19 @@ nav a {
 	transform: translate(50%, -50%);
 }
 
+#pause-slideshow {
+	position: absolute;
+	width: 40px;
+	height: 40px;
+	background-color: rgba( 200, 200, 200, 0.8 );
+	text-align: center;
+	right: 20px;
+	bottom: 20px;
+	border: black 2px solid;
+	border-radius: 100%;
+
+}
+
 main {
 	display: flex;
 	flex-direction: column;
