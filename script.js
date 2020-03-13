@@ -117,7 +117,12 @@ function stopSlideshow() {
 }
 
 function toggleSlideshow( start ) {
-	( start ) ? startSlideshow() : stopSlideshow();
+	if ( start ) {
+		startSlideshow();
+		slideNext();
+	} else {
+		stopSlideshow();
+	}
 }
 
 async function loadStore( file ) {
