@@ -203,13 +203,13 @@ nav a {
 	padding: 0;
 }
 
-#banner-prev {
+.btn-arrow-prev {
 	left: 0;
 	top: 50%;
 	transform: translate(-50%, -50%);
 }
 
-#banner-next {
+.btn-arrow-next {
 	right: 0;
 	top: 50%;
 	transform: translate(50%, -50%);

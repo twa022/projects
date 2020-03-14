@@ -27,7 +27,7 @@ async function generateBanner() {
 		html += `<a href="${STORE.projects[i].link}" _idx=${i} class="banner-item"
 					style="color: ${STORE.projects[i].fontColor}">
 					<div class="banner-item-bgnd" style="background-image: linear-gradient( to bottom, rgba(50, 50, 50, 0.8), rgba( 100, 100, 100, 0.4) ), url('${STORE.projects[i].image}');"></div>
-					<div class="banner-item-text"><h2>${STORE.projects[i].title}</h2>${STORE.projects[i].text}</div></a>`;
+					<div class="banner-item-text"><h2>${STORE.projects[i].title}</h2>${STORE.projects[i].summary}</div></a>`;
 	}
 	html += `<a href="projects.html" _idx=${STORE.projects.length} class="banner-item">
 				<div class="banner-item-bgnd" style="background-image: linear-gradient( to bottom, rgba(50, 50, 50, 0.8), rgba( 100, 100, 100, 0.4) ), url('images/all_projects.png');"></div>

@@ -6,27 +6,45 @@
 	"projects": [
 		{
 			"title": "Quiz",
+			"id": 1,
 			"date": "20190311",
 			"image": "images/quiz-app.png",
 			"fontColor": "pink",
 			"link": "https://github.com/twa022/quiz-app",
-			"text": "A modular trivia app"
+			"summary": "A modular trivia app",
+			"text": "Quiz is an easy to use trivia app, making it easy to deploy multiple choice trivia games. Quizzes are stored in JSON files and can be...",
+			"gallery": [
+				{
+					"image": "images/quiz-app.png",
+					"alt": "Quiz app main page",
+					"caption": "The landing page displaying a searchable listing of available quizzes."
+				},
+				{
+					"image": "images/apple.jpg",
+					"alt": "random apple",
+					"caption": "This is a picture of an apple. I needed a second picture."
+				}
+			]
 		},
 		{
 			"title": "Apple Project",
+			"id": 2,
 			"date": "20190310",
 			"image": "images/apple.jpg",
 			"fontColor": "white",
 			"link": "apples.html",
-			"text": "Apples can be green or red???"
+			"summary": "Apples can be green or red???",
+			"text": "Apples are delicious. I eat thim with peanut butter."
 		},
 		{
 			"title": "Tofu for Days",
+			"id": 3,
 			"date": "20190309",
 			"image": "images/tofu.png",
 			"fontColor": "cyan",
 			"link": "tofu.html",
-			"text": "Doesn't that tofu look yummy!"
+			"summary": "Doesn't that tofu look yummy!",
+			"text": "Tofu is kind of heard to get right. It's important to press the water out of it first."
 		}
 	],
 	"blog": [
