@@ -16,9 +16,9 @@ function displayProjects() {
 	let html = '';
 	STORE.projects.forEach( function( project ) {
 		html += `
-		<div class="project">
+		<div class="project" id="project-${project.id}">
 			<h3><a href="${project.link}">${project.title}</a></h3>
-			<div class="project-summary" id="project-${project.id}" _id=${project.id}>
+			<div class="project-summary" _id=${project.id}>
 				<img src="${project.image}" alt="${project.title} picture">
 				${project.text}
 			</div>
