@@ -34,8 +34,6 @@ function gotoPageHandler() {
 	$('.page-nav').on('click', 'a', function( event ) {
 		event.preventDefault();
 		let text = $(this).html();
-		console.log( `text: "${text}"; ${text.localeCompare( "First" )}` );
-		
 		let pgnum = 0;
 		if ( text.localeCompare("First") === 0 ) {
 			pgnum = 0;

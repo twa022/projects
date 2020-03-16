@@ -22,7 +22,7 @@ function displayProjects( first=0 ) {
 	for ( let i = first ; i < STORE.projects.length && i < first + ENTRIES_PER_PAGE ; i++ ) {
 		let project = STORE.projects[i];
 		html += `
-		<div class="projects-entry" id="project-${project.id}" _idx=${i}>
+		<div class="projects-entry" _id="${project.id}" _idx=${i}>
 			<h3><a href="${project.link}">${project.title}</a></h3>
 			<div class="project-summary">
 				<img src="${project.image}" alt="${project.title} picture">
@@ -62,7 +62,7 @@ function galleryHandler() {
 	$('.projects-entries').on('click', 'img', function( event ) {
 		event.stopPropagation();
 		try {
-			generateGallery( $(this).closest('.projects-entry').attr('_idx') );
+			generateGallery( $(this).closest('.projects-entry').attr('_id') );
 			overlayBoxIn( 'gallery' );
 		} catch ( e ) { };
 	})
@@ -86,8 +86,6 @@ function gotoPageHandler() {
 	$('.page-nav').on('click', 'a', function( event ) {
 		event.preventDefault();
 		let text = $(this).html();
-		console.log( `text: "${text}"; ${text.localeCompare( "First" )}` );
-		
 		let pgnum = 0;
 		if ( text.localeCompare("First") === 0 ) {
 			pgnum = 0;
