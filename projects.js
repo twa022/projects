@@ -14,19 +14,23 @@ function generateGallery( id ) {
 	$('.gallery-slider').html( html );
 }
 
-function displayProjects() {
+function displayProjects( first=0 ) {
 	let html = '';
-	STORE.projects.forEach( function( project, idx ) {
+	if ( first >= STORE.projects.length ) first = STORE.projects.length - ENTRIES_PER_PAGE;
+	if ( first < 0 ) first = 0;
+
+	for ( let i = first ; i < STORE.projects.length && i < first + ENTRIES_PER_PAGE ; i++ ) {
+		let project = STORE.projects[i];
 		html += `
-		<div class="projects-entry" id="project-${project.id}" _idx=${idx}>
+		<div class="projects-entry" id="project-${project.id}" _idx=${i}>
 			<h3><a href="${project.link}">${project.title}</a></h3>
 			<div class="project-summary">
 				<img src="${project.image}" alt="${project.title} picture">
 				${project.text}
 			</div>
 		</div>`
-	});
-	$('.projects-entries').append( html );
+	}
+	$('.projects-entries').html( html );
 	displayNav( 'projects', ENTRIES_PER_PAGE );
 }
 
@@ -78,6 +82,25 @@ function galleryPrevHandler() {
 	});
 }
 
+function gotoPageHandler() {
+	$('.page-nav').on('click', 'a', function( event ) {
+		event.preventDefault();
+		let text = $(this).html();
+		console.log( `text: "${text}"; ${text.localeCompare( "First" )}` );
+		
+		let pgnum = 0;
+		if ( text.localeCompare("First") === 0 ) {
+			pgnum = 0;
+		} else if ( text.localeCompare("Last") === 0 ) {
+			pgnum = Math.ceil( STORE.projects.length / ENTRIES_PER_PAGE ) - 1;
+		} else {
+			pgnum = Number( text ) - 1;
+		}
+		console.log( `pgnum: ${pgnum}` );
+		displayProjects( pgnum * ENTRIES_PER_PAGE );
+	});
+}
+
 async function main() {
 	await commonMain();
 
@@ -85,6 +108,7 @@ async function main() {
 	$(galleryHandler);
 	$(galleryNextHandler);
 	$(galleryPrevHandler);
+	$(gotoPageHandler);
 }
 
 main();
