@@ -52,10 +52,11 @@ function galleryPrev() {
 }
 
 function galleryHandler() {
-	$('.projects').on('click', '.project-summary', function( event ) {
+	$('.projects').on('click', 'img', function( event ) {
 		event.stopPropagation();
 		try {
-			generateGallery( $(this).attr('_id') );
+			console.log( `${ $(this).closest('.project-summary') }` );
+			generateGallery( $(this).closest('.project-summary').attr('_id') );
 			overlayBoxIn( 'gallery' );
 		} catch ( e ) { };
 	})
