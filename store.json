@@ -52,25 +52,115 @@
 			"title": "Making this awesome site!",
 			"date": "20200311",
 			"link": "index.html",
-			"text": "Some weird issues with the banner, but going good..."
+			"summary": "Some weird issues with the banner, but going good...",
+			"text": "abc",
+			"image": "images/blog/website1.png"
 		},
 		{
 			"title": "Making Soup",
 			"date": "20190311",
 			"link": "blog.html#20190311-2",
-			"text": "Bean and kale soup sure sounds tasty"
+			"summary": "Bean and kale soup sure sounds tasty",
+			"text": "abc",
+			"image": "images/blog/bean_kale_soup.jpg"
 		},
 		{
 			"title": "Making Soup",
 			"date": "20190311",
 			"link": "blog.html#20190311-2",
-			"text": "Bean and kale soup sure sounds tasty"
+			"text": "abc",
+			"summary": "Bean and kale soup sure sounds tasty"
 		},
 		{
 			"title": "Making Soup",
 			"date": "20190311",
 			"link": "blog.html#20190311-2",
-			"text": "Bean and kale soup sure sounds tasty"
+			"summary": "Bean and kale soup sure sounds tasty",
+			"text": "abc"
+		},
+		{
+			"title": "Making this awesome site!",
+			"date": "20200311",
+			"link": "index.html",
+			"summary": "Some weird issues with the banner, but going good...",
+			"text": "abc"
+		},
+		{
+			"title": "Making Soup",
+			"date": "20190311",
+			"link": "blog.html#20190311-2",
+			"summary": "Bean and kale soup sure sounds tasty",
+			"text": "abc"
+		},
+		{
+			"title": "Making Soup",
+			"date": "20190311",
+			"link": "blog.html#20190311-2",
+			"summary": "Bean and kale soup sure sounds tasty",
+			"text": "abc"
+		},
+		{
+			"title": "Making Soup",
+			"date": "20190311",
+			"link": "blog.html#20190311-2",
+			"summary": "Bean and kale soup sure sounds tasty",
+			"text": "abc"
+		},
+		{
+			"title": "Making this awesome site!",
+			"date": "20200311",
+			"link": "index.html",
+			"summary": "Some weird issues with the banner, but going good...",
+			"text": "abc"
+		},
+		{
+			"title": "Making Soup",
+			"date": "20190311",
+			"link": "blog.html#20190311-2",
+			"summary": "Bean and kale soup sure sounds tasty",
+			"text": "abc"
+		},
+		{
+			"title": "Making Soup",
+			"date": "20190311",
+			"link": "blog.html#20190311-2",
+			"summary": "Bean and kale soup sure sounds tasty",
+			"text": "abc"
+		},
+		{
+			"title": "Making Soup",
+			"date": "20190311",
+			"link": "blog.html#20190311-2",
+			"summary": "Bean and kale soup sure sounds tasty",
+			"text": "abc"
+		},
+		{
+			"title": "Making this awesome site!",
+			"date": "20200311",
+			"link": "index.html",
+			"summary": "Some weird issues with the banner, but going good...",
+			"text": "abc"
+		},
+		{
+			"title": "Making Soup",
+			"date": "20190311",
+			"link": "blog.html#20190311-2",
+			"summary": "Bean and kale soup sure sounds tasty",
+			"text": "abc"
+		},
+		{
+			"title": "Making Soup",
+			"date": "20190311",
+			"link": "blog.html#20190311-2",
+			"summary": "Bean and kale soup sure sounds tasty",
+			"text": "abc"
+		},
+		{
+			"title": "Making Soup",
+			"date": "20190311",
+			"link": "blog.html#20190311-2",
+			"summary": "Bean and kale soup sure sounds tasty",
+			"text": "abc"
 		}
 	],
 	"links": [

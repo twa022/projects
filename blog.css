@@ -1,0 +1,28 @@
+nav ul {
+	padding: 0;
+}
+
+nav li {
+	display: inline-block;
+}
+
+.blog-entries {
+	position: relative;
+	float: left;
+	height: 100%;
+}
+
+.blog-entry {
+	width: 100%;
+	float: left;
+	margin-top: 12px;
+	border-bottom: 2px grey solid;
+}
+
+.blog-img {
+	display: inline-block;
+	width: 40%;
+	float: left;
+	margin-right: 12px;
+	margin-bottom: 12px;
+}

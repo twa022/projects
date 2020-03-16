@@ -1,0 +1,41 @@
+---
+title: Ted Alff, Programmer
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Ted Alff, Programmer</title>
+	<meta name="description" content="Projects page for Ted Alff">
+
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" rel="stylesheet" type="text/css">
+	<link href="main.css" rel="stylesheet" type="text/css">
+	<link href="blog.css" rel="stylesheet" type="text/css">
+
+	<!--Fonts-->
+	<link href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" rel="stylesheet" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+	<link href="https://fonts.googleapis.com/css?family=PT+Serif|Roboto&display=swap" rel="stylesheet">
+</head>
+<body>
+	{% include common.html %}
+	<main>
+		<section class="blog" id="blog">
+			<h2>Blog</h2>
+			<div class="blog-search">
+				<input type="text" id="blog-search-field" placeholder="Search blog entries">
+				<button id="clear-field"><i class="fas fa-times"></i></button>
+			</div>
+			<section class="blog-entries"></section>
+			<nav class="blog-page-nav">
+				<span>Page: </span>
+				<ul>
+				</ul>
+			</nav>
+		</section>
+	</main>
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+	<script src="common.js"></script>
+	<script src="blog.js"></script>
+</body>
+</html>

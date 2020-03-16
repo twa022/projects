@@ -41,7 +41,7 @@ async function generateBlog() {
 		// Placeholder HTML to test the banner.
 		html += `<div><a href="${STORE.blog[i].link}" _idx=${i}
 					class="blog-link">
-					<div><h3>${STORE.blog[i].title}</h3>${STORE.blog[i].text}</div></a></div>`;
+					<div><h3>${STORE.blog[i].title}</h3>${STORE.blog[i].summary}</div></a></div>`;
 	}
 	if ( STORE.blog.length > MAX_BLOG_LINKS ) {
 		html += `<div><a href="blog.html" _idx=${MAX_BLOG_LINKS}
