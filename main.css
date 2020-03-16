@@ -281,8 +281,12 @@ main > section h3 {
 	margin-bottom: 6px;
 }
 
-main section > div:not(:last-child) {
+main section > div {
 	border-bottom: rgba(100, 100, 100, 0.8) solid 2px;
+}
+
+.last-child-no-border-bottom *:last-child {
+	border-bottom: none;
 }
 
 .banner-slider {
