@@ -14,7 +14,7 @@ function generateGallery( id ) {
 	$('.gallery-slider').html( html );
 }
 
-async function displayProjects() {
+function displayProjects() {
 	let html = '';
 	STORE.projects.forEach( function( project, idx ) {
 		html += `
@@ -26,7 +26,7 @@ async function displayProjects() {
 			</div>
 		</div>`
 	});
-	await $('.projects-entries').append( html );
+	$('.projects-entries').append( html );
 	displayNav( 'projects', ENTRIES_PER_PAGE );
 }
 
