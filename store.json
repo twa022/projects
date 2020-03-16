@@ -168,13 +168,15 @@
 			"title": "Bean Kale Soup Recipe",
 			"date": "20200311",
 			"link": "https://www.allrecipes.com/recipe/78023/bean-soup-with-kale/",
-			"text": "I use carrots instead of tomatoes"
+			"summary": "I use carrots instead of tomatoes",
+			"text": "Check out this recipe for a delicious hearty soup. I use thinly sliced carrots instead of tomatoes and always make a double batch. Don't skimp on the garlic!"
 		},
 		{
 			"title": "The Fetch API",
 			"date": "20200311",
 			"link": "https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API",
-			"text": "Using fetch to retrieve resources. Read up on async / await too..."
+			"summary": "Using fetch to retrieve resources. Read up on async / await too...",
+			"text": "For my quiz app project I wanted to make the page a container for various quizzes so needed to find an easy way to load the pertinent data from an external resource. Read up on the fetch API as an easy way to retrieve external files."
 		}
 	]
 }

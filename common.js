@@ -57,7 +57,7 @@ async function generateLinks() {
 		// Placeholder HTML to test the banner.
 		html += `<div><a href="${STORE.links[i].link}" _idx=${i} target="_blank rel="noopener"
 					class="link">
-					<div><h3>${STORE.links[i].title}</h3>${STORE.links[i].text}</div></a></div>`;
+					<div><h3>${STORE.links[i].title}</h3>${STORE.links[i].summary}</div></a></div>`;
 	}
 	if ( STORE.links.length > MAX_LINKS ) {
 		html += `<div><a href="links.html" _idx=${MAX_LINKS}"

@@ -1,0 +1,20 @@
+nav ul {
+	padding: 0;
+}
+
+nav li {
+	display: inline-block;
+}
+
+.links-entries {
+	margin-top: 12px;
+}
+
+.links-entry {
+	margin-top: 12px;
+	border-bottom: 2px grey solid;
+}
+
+.links-entry i {
+	margin-left: 5px;
+}

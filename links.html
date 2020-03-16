@@ -11,7 +11,7 @@ title: Ted Alff, Programmer
 
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" rel="stylesheet" type="text/css">
 	<link href="main.css" rel="stylesheet" type="text/css">
-	<link href="projects.css" rel="stylesheet" type="text/css">
+	<link href="links.css" rel="stylesheet" type="text/css">
 
 	<!--Fonts-->
 	<link href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" rel="stylesheet" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
@@ -20,14 +20,22 @@ title: Ted Alff, Programmer
 <body>
 	{% include common.html %}
 	<main>
-		<section class="projects" id="projects">
+		<section class="links" id="links">
 			<h2>Links</h2>
+			<div class="links-search">
+				<input type="text" id="links-search-field" placeholder="Search links entries">
+				<button id="clear-field"><i class="fas fa-times"></i></button>
+			</div>
+			<section class="links-entries"></section>
+			<nav class="links-page-nav">
+				<span>Page: </span>
+				<ul>
+				</ul>
+			</nav>
 		</section>
 	</main>
 	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 	<script src="common.js"></script>
-	<script>
-		commonMain();
-	</script>
+	<script src="links.js"></script>
 </body>
 </html>
