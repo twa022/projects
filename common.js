@@ -143,6 +143,30 @@ function overlayOut() {
 	$('.overlay-box').fadeOut( function() { $('.overlay-layer').fadeOut(); } );
 }
 
+function displayNav( page, entriesPerPage ) {
+	let html = '';
+	let currentPage = Number($(`.${page}-entry:first-child`).attr('_idx')) / entriesPerPage;
+	let numPages = Math.ceil( STORE[page].length / entriesPerPage );
+	let first = currentPage - 2;
+	if ( first < 0 ) first = 0;
+	let last = currentPage + 2;
+	if ( last - first < 4 ) last = first + 4;
+	if ( last >= numPages ) last = numPages - 1;
+	console.log(`"${$(`.${page}-entry:first-child`).attr('_idx')}" first: ${first} last ${last}`)
+	if ( first > 0 ) html += `<li><a href='#' style="text-decoration: underline">First</a></li> `;
+	for ( let i = first ; i <= last ; i++ ) {
+		if ( i === currentPage ) {
+			html += `<li><a>${i + 1}</a></li> `;
+		} else {
+			html += `<li><a href='#' style="text-decoration: underline">${i + 1}</a></li> `;
+		}
+	}
+	if ( last < numPages - 1 ) html += `<li><a href='#' style="text-decoration: underline">Last</a></li>`;
+
+	$('.page-nav').find('ul').html( html );
+}
+
+
 /********************************
  *        EVENT HANDLERS        *
  ********************************/

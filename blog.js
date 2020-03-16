@@ -15,32 +15,8 @@ function displayBlog( first ) {
 			</div>`;
 	}
 	$('.blog-entries').html( html );
-	displayNav();
+	displayNav( 'blog', ENTRIES_PER_PAGE );
 }
-
-function displayNav() {
-	let html = '';
-	let currentPage = Number($('.blog-entry:first-child').attr('_idx')) / ENTRIES_PER_PAGE;
-	let numPages = Math.ceil( STORE.blog.length / ENTRIES_PER_PAGE );
-	let first = currentPage - 2;
-	if ( first < 0 ) first = 0;
-	let last = currentPage + 2;
-	if ( last - first < 4 ) last = first + 4;
-	if ( last >= numPages ) last = numPages - 1;
-	if ( first > 0 ) html += `<li><a href='#' style="text-decoration: underline">First</a></li> `;
-	for ( let i = first ; i <= last ; i++ ) {
-		if ( i === currentPage ) {
-			html += `<li><a>${i + 1}</a></li> `;
-		} else {
-			html += `<li><a href='#' style="text-decoration: underline">${i + 1}</a></li> `;
-		}
-	}
-	if ( last < numPages - 1 ) html += `<li><a href='#' style="text-decoration: underline">Last</a></li>`;
-
-	$('.blog-page-nav').find('ul').html( html );
-}
-	
-	
 
 function searchBlogHander() {
 	$('#blog-search-field').on('change', function( event ) {
@@ -55,7 +31,7 @@ function clearSearchHandler() {
 }
 
 function gotoPageHandler() {
-	$('.blog-page-nav').on('click', 'a', function( event ) {
+	$('.page-nav').on('click', 'a', function( event ) {
 		event.preventDefault();
 		let text = $(this).html();
 		console.log( `text: "${text}"; ${text.localeCompare( "First" )}` );

@@ -1,5 +1,7 @@
 "using strict";
 
+const ENTRIES_PER_PAGE = 2;
+
 function generateGallery( id ) {
 	let html = '';
 	STORE.projects.find( e => Number(e.id) === Number(id) ).gallery.forEach( function( i ) {
@@ -12,19 +14,20 @@ function generateGallery( id ) {
 	$('.gallery-slider').html( html );
 }
 
-function displayProjects() {
+async function displayProjects() {
 	let html = '';
-	STORE.projects.forEach( function( project ) {
+	STORE.projects.forEach( function( project, idx ) {
 		html += `
-		<div class="project" id="project-${project.id}">
+		<div class="projects-entry" id="project-${project.id}" _idx=${idx}>
 			<h3><a href="${project.link}">${project.title}</a></h3>
-			<div class="project-summary" _id=${project.id}>
+			<div class="project-summary">
 				<img src="${project.image}" alt="${project.title} picture">
 				${project.text}
 			</div>
 		</div>`
 	});
-	$('.projects').append( html );
+	await $('.projects-entries').append( html );
+	displayNav( 'projects', ENTRIES_PER_PAGE );
 }
 
 function galleryNext() {
@@ -52,11 +55,10 @@ function galleryPrev() {
 }
 
 function galleryHandler() {
-	$('.projects').on('click', 'img', function( event ) {
+	$('.projects-entries').on('click', 'img', function( event ) {
 		event.stopPropagation();
 		try {
-			console.log( `${ $(this).closest('.project-summary') }` );
-			generateGallery( $(this).closest('.project-summary').attr('_id') );
+			generateGallery( $(this).closest('.projects-entry').attr('_idx') );
 			overlayBoxIn( 'gallery' );
 		} catch ( e ) { };
 	})

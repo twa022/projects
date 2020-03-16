@@ -281,7 +281,7 @@ main > section h3 {
 	margin-bottom: 6px;
 }
 
-main > section > div:not(:last-child) {
+main section > div:not(:last-child) {
 	border-bottom: rgba(100, 100, 100, 0.8) solid 2px;
 }
 
@@ -340,6 +340,14 @@ main > section > div:not(:last-child) {
 
 .no-display {
 	display: none;
+}
+
+.page-nav ul {
+	padding: 0;
+}
+
+.page-nav li {
+	display: inline-block;
 }
 
 @media screen and ( min-width: 640px ) {

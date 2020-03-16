@@ -29,8 +29,14 @@ title: Ted Alff, Programmer
 		<button class="btn-arrow btn-arrow-next" id="gallery-next"><i class="fas fa-chevron-right"></i></button>	
 	</div>
 	<main>
-		<section class="projects" id="projects">
-			<h2>My projects</h2>
+		<section class="projects">
+			<h2>My Projects</h2>
+			<div class="projects-search no-display">
+				<input type="text" id="project-search-field" placeholder="Search projects entries">
+				<button id="clear-field"><i class="fas fa-times"></i></button>
+			</div>
+			<section class="projects-entries"></section>
+			{% include page-nav.html %}
 		</section>
 	</main>
 	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>

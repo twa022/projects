@@ -1,10 +1,14 @@
-.project {
+main {
+	display: block;
+}
+
+.projects-entry {
 	position: relative;
 	float: left;
 	width: 100%;
 }
 
-.project img {
+.projects-entry img {
 	width: 50%;
 	min-width: 150px;
 	max-width: 500px;
@@ -13,7 +17,7 @@
 	margin-bottom: 12px;
 }
 
-.project h3 {
+.projects-entry h3 {
 	font-size: 1.6rem;
 	margin-bottom: 10px;
 	position: absolute;
@@ -23,12 +27,12 @@
 	transform: translateX(-50%);
 }
 
-.project {
+.projects-entry {
 	padding-top: calc( 1.6rem + 20px );
 	font-size: 1.4rem;
 }
 
-.project a {
+.projects-entry a {
 	text-decoration: none;
 }
 
