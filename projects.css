@@ -6,15 +6,25 @@ main {
 	position: relative;
 	float: left;
 	width: 100%;
+	padding-top: calc( 1.6rem + 20px );
+	font-size: 1.4rem;
 }
 
-.projects-entry img {
+.project-image {
+	position: relative;
+	float: left;
 	width: 50%;
 	min-width: 150px;
 	max-width: 500px;
-	float: left;
+	min-height: 50px;
+	height: 100%;
 	margin-right: 12px;
 	margin-bottom: 12px;
+}
+
+.projects-entry img {
+	float: left;
+	width: 100%;
 }
 
 .projects-entry h3 {
@@ -27,13 +37,20 @@ main {
 	transform: translateX(-50%);
 }
 
-.projects-entry {
-	padding-top: calc( 1.6rem + 20px );
-	font-size: 1.4rem;
-}
-
 .projects-entry a {
 	text-decoration: none;
+}
+
+.entry-gallery-text {
+	position: absolute;
+	display: inline-block;
+	bottom: 2px;
+	right: 2px;
+	font-size: 1.0rem;
+	background: rgba( 50, 50, 50, 0.8 );
+	color: white;
+	padding: 4px;
+	border-radius: 2px;
 }
 
 .gallery {

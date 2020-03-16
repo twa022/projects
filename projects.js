@@ -25,7 +25,10 @@ function displayProjects( first=0 ) {
 		<div class="projects-entry" _id="${project.id}" _idx=${i}>
 			<h3><a href="${project.link}">${project.title}</a></h3>
 			<div class="project-summary">
-				<img src="${project.image}" alt="${project.title} picture">
+				<div class="project-image">
+					<img src="${project.image}" alt="${project.title} picture">
+					<div class="entry-gallery-text">Click for Gallery</div>
+				</div>
 				${project.text}
 			</div>
 		</div>`
