@@ -26,7 +26,7 @@ function displayProjects( first=0 ) {
 			<h3><a href="${project.link}">${project.title}</a></h3>
 			<div class="project-summary">
 				<div class="project-image">
-					<img src="${project.image}" alt="${project.title} picture">
+					<img src="${project.gallery[0].image}" alt="${project.gallery[0].alt} picture">
 					<div class="entry-gallery-text">Click for Gallery</div>
 				</div>
 				${project.text}

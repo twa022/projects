@@ -30,7 +30,13 @@
 			"title": "Apple Project",
 			"id": 2,
 			"date": "20190310",
-			"image": "images/apple.jpg",
+			"gallery": [
+				{
+					"image": "images/apple.jpg",
+					"alt": "Apple Project image",
+					"caption": "A picture of an apple for the apple project."
+				}
+			],
 			"fontColor": "white",
 			"link": "apples.html",
 			"summary": "Apples can be green or red???",
@@ -40,7 +46,13 @@
 			"title": "Tofu for Days",
 			"id": 3,
 			"date": "20190309",
-			"image": "images/tofu.png",
+			"gallery": [
+				{
+					"image": "images/tofu.png",
+					"alt": "Tofu Project Image",
+					"caption": "A delicious tofu dinner!!"
+				}
+			],
 			"fontColor": "cyan",
 			"link": "tofu.html",
 			"summary": "Doesn't that tofu look yummy!",

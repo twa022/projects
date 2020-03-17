@@ -346,6 +346,10 @@ main section > div {
 	display: none;
 }
 
+.page-nav {
+	margin-right: 10px;
+}
+
 .page-nav ul {
 	padding: 0;
 }
