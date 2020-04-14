@@ -250,4 +250,4 @@ async function main() {
 	generateBio();
 }
 
-main();
+$(document).ready( function() { main() } );

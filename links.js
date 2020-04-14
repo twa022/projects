@@ -56,4 +56,4 @@ async function main() {
 	displayLinks( 0 );
 }
 
-main();
+$(document).ready( function() { main() } );

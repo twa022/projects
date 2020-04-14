@@ -14,4 +14,4 @@ async function main() {
 	generateLinks();
 }
 
-main();
+$(document).ready( function() { main() } );

@@ -112,4 +112,4 @@ async function main() {
 	$(gotoPageHandler);
 }
 
-main();
+$(document).ready( function() { main() } );

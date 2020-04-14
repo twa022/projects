@@ -57,4 +57,4 @@ async function main() {
 	displayBlog( 0 );
 }
 
-main();
+$(document).ready( function() { main() } );
