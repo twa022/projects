@@ -8,7 +8,7 @@ function displayLinks( first ) {
 
 	for ( let i = first ; i < STORE.links.length && i < first + ENTRIES_PER_PAGE ; i++ ) {
 		html +=
-			`<div class="links-entry" _idx=${i}>
+			`<div class="links-entry" data-idx=${i}>
 				<h3><a href="${STORE.links[i].link}">${STORE.links[i].title} <i class="fas fa-external-link-alt"></i></a></h3>
 				<p>${STORE.links[i].text}</p>
 			</div>`;

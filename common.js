@@ -24,12 +24,12 @@ async function generateBanner() {
 	let html = "";
 	for ( let i = 0 ; i < STORE.projects.length ; i++ ) {
 		// Placeholder HTML to test the banner.
-		html += `<a href="${STORE.projects[i].link}" _idx=${i} class="banner-item"
+		html += `<a href="${STORE.projects[i].link}" data-idx=${i} class="banner-item"
 					style="color: ${STORE.projects[i].fontColor}">
 					<div class="banner-item-bgnd" style="background-image: linear-gradient( to bottom, rgba(50, 50, 50, 0.8), rgba( 100, 100, 100, 0.4) ), url('${STORE.projects[i].gallery[0].image}');"></div>
 					<div class="banner-item-text"><h2>${STORE.projects[i].title}</h2>${STORE.projects[i].summary}</div></a>`;
 	}
-	html += `<a href="projects.html" _idx=${STORE.projects.length} class="banner-item">
+	html += `<a href="projects.html" data-idx=${STORE.projects.length} class="banner-item">
 				<div class="banner-item-bgnd" style="background-image: linear-gradient( to bottom, rgba(50, 50, 50, 0.8), rgba( 100, 100, 100, 0.4) ), url('images/all_projects.png');"></div>
 				<div class="banner-item-text"><h2>All Projects</h2> </div></a>`;
 	$('.banner-slider').html(html);
@@ -39,12 +39,12 @@ async function generateBlog() {
 	let html = "";
 	for ( let i = 0 ; i < STORE.blog.length && i < MAX_BLOG_LINKS ; i++ ) {
 		// Placeholder HTML to test the banner.
-		html += `<div><a href="${STORE.blog[i].link}" _idx=${i}
+		html += `<div><a href="${STORE.blog[i].link}" data-idx=${i}
 					class="blog-link">
 					<div><h3>${STORE.blog[i].title}</h3>${STORE.blog[i].summary}</div></a></div>`;
 	}
 	if ( STORE.blog.length > MAX_BLOG_LINKS ) {
-		html += `<div><a href="blog.html" _idx=${MAX_BLOG_LINKS}
+		html += `<div><a href="blog.html" data-idx=${MAX_BLOG_LINKS}
 		         class="blog-link">
 		         <div><h3>All Blog Entries</h3></div></a></div>`;
 	}
@@ -55,12 +55,12 @@ async function generateLinks() {
 	let html = "";
 	for ( let i = 0 ; i < STORE.links.length && i < MAX_LINKS ; i++ ) {
 		// Placeholder HTML to test the banner.
-		html += `<div><a href="${STORE.links[i].link}" _idx=${i} target="_blank rel="noopener"
+		html += `<div><a href="${STORE.links[i].link}" data-idx=${i} target="_blank rel="noopener"
 					class="link">
 					<div><h3>${STORE.links[i].title}</h3>${STORE.links[i].summary}</div></a></div>`;
 	}
 	if ( STORE.links.length > MAX_LINKS ) {
-		html += `<div><a href="links.html" _idx=${MAX_LINKS}"
+		html += `<div><a href="links.html" data-idx=${MAX_LINKS}"
 		         class="link">
 				 <div><h3>All Links</h3></div></a></div>`;
 	}
@@ -145,14 +145,14 @@ function overlayOut() {
 
 function displayNav( page, entriesPerPage ) {
 	let html = '';
-	let currentPage = Number($(`.${page}-entry:first-child`).attr('_idx')) / entriesPerPage;
+	let currentPage = Number($(`.${page}-entry:first-child`).data('idx')) / entriesPerPage;
 	let numPages = Math.ceil( STORE[page].length / entriesPerPage );
 	let first = currentPage - 2;
 	if ( first < 0 ) first = 0;
 	let last = currentPage + 2;
 	if ( last - first < 4 ) last = first + 4;
 	if ( last >= numPages ) last = numPages - 1;
-	console.log(`"${$(`.${page}-entry:first-child`).attr('_idx')}" first: ${first} last ${last}`)
+	console.log(`"${$(`.${page}-entry:first-child`).data('idx')}" first: ${first} last ${last}`)
 	if ( first > 0 ) html += `<li><a href='#' style="text-decoration: underline">First</a></li> `;
 	for ( let i = first ; i <= last ; i++ ) {
 		if ( i === currentPage ) {

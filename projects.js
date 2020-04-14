@@ -22,7 +22,7 @@ function displayProjects( first=0 ) {
 	for ( let i = first ; i < STORE.projects.length && i < first + ENTRIES_PER_PAGE ; i++ ) {
 		let project = STORE.projects[i];
 		html += `
-		<div class="projects-entry" _id="${project.id}" _idx=${i}>
+		<div class="projects-entry" data-id="${project.id}" data-idx=${i}>
 			<h3><a href="${project.link}">${project.title}</a></h3>
 			<div class="project-summary">
 				<div class="project-image">
@@ -65,7 +65,7 @@ function galleryHandler() {
 	$('.projects-entries').on('click', 'img', function( event ) {
 		event.stopPropagation();
 		try {
-			generateGallery( $(this).closest('.projects-entry').attr('_id') );
+			generateGallery( $(this).closest('.projects-entry').data('id') );
 			overlayBoxIn( 'gallery' );
 		} catch ( e ) { };
 	})
