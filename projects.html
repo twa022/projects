@@ -31,10 +31,13 @@ title: Ted Alff, Programmer
 	<main>
 		<section class="projects">
 			<h2>My Projects</h2>
-			<div class="projects-search no-display">
-				<input type="text" id="project-search-field" placeholder="Search projects entries">
-				<button id="clear-field"><i class="fas fa-times"></i></button>
-			</div>
+			<form class="projects-search no-display">
+				<fieldset>
+					<legend>Search Projects</legend>
+					<input type="text" id="project-search-field" placeholder="Search projects entries">
+					<button id="clear-field" aria-label="clear-search-field"><i class="fas fa-times"></i></button>
+				</fieldset>
+			</form>
 			<section class="projects-entries"></section>
 			{% include page-nav.html %}
 		</section>

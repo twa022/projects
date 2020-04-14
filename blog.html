@@ -22,10 +22,13 @@ title: Ted Alff, Programmer
 	<main>
 		<section class="blog" id="blog">
 			<h2>Blog</h2>
-			<div class="blog-search">
-				<input type="text" id="blog-search-field" placeholder="Search blog entries">
-				<button id="clear-field"><i class="fas fa-times"></i></button>
-			</div>
+			<form class="blog-search">
+				<fieldset>
+					<legend>Search Blogs</legend>
+					<input type="text" id="blog-search-field" placeholder="Search blog entries">
+					<button id="clear-field" aria-label="clear-search-field"><i class="fas fa-times"></i></button>
+				</fieldset>
+			</form>
 			<section class="blog-entries"></section>
 			{% include page-nav.html %}
 		</section>

@@ -22,9 +22,12 @@ title: Ted Alff, Programmer
 	<main>
 		<section class="links" id="links">
 			<h2>Links</h2>
-			<div class="links-search">
-				<input type="text" id="links-search-field" placeholder="Search links entries">
-				<button id="clear-field"><i class="fas fa-times"></i></button>
+			<form class="links-search">
+				<fielset>
+					<legend>Search Links</legend>
+					<input type="text" id="links-search-field" placeholder="Search links entries">
+					<button id="clear-field" aria-label="clear-search-field"><i class="fas fa-times"></i></button>
+				</fielset>
 			</div>
 			<section class="links-entries"></section>
 			{% include page-nav.html %}
