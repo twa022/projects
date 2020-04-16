@@ -76,7 +76,7 @@ header * {
 	display: inline-block;
 }
 
-nav {
+nav.main-menu {
 	text-align: right;
 	font-size: 1.4rem;
 }
@@ -89,7 +89,7 @@ nav li {
 	list-style: none;
 }
 
-nav li:not(:nth-child(1))::before {
+nav.main-menu li:not(:nth-child(1))::before {
 	content: "| ";
 }
 
@@ -347,6 +347,8 @@ main section > div {
 }
 
 .page-nav {
+	text-align: center;
+	font-size: 1.2rem;
 	margin-right: 10px;
 }
 
