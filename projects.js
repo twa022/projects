@@ -85,25 +85,9 @@ function galleryPrevHandler() {
 	});
 }
 
-function gotoPageHandler() {
-	$('.page-nav').on('click', 'a', function( event ) {
-		event.preventDefault();
-		let text = $(this).html();
-		let pgnum = 0;
-		if ( text.localeCompare("First") === 0 ) {
-			pgnum = 0;
-		} else if ( text.localeCompare("Last") === 0 ) {
-			pgnum = Math.ceil( STORE.projects.length / ENTRIES_PER_PAGE ) - 1;
-		} else {
-			pgnum = Number( text ) - 1;
-		}
-		console.log( `pgnum: ${pgnum}` );
-		displayProjects( pgnum * ENTRIES_PER_PAGE );
-	});
-}
-
 async function main() {
 	await commonMain();
+	$('body').data('entries-per-page', ENTRIES_PER_PAGE );
 
 	displayProjects();
 	$(galleryHandler);

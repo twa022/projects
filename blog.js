@@ -8,7 +8,7 @@ function displayBlog( first ) {
 
 	for ( let i = first ; i < STORE.blog.length && i < first + ENTRIES_PER_PAGE ; i++ ) {
 		html +=
-			`<div class="blog-entry" _idx=${i}>
+			`<div class="blog-entry" data-idx=${i}>
 				<img class="blog-img" src="${STORE.blog[i].image}" alt="${STORE.blog[i].title}">
 				<h3>${STORE.blog[i].title}</h3>
 				<p>${STORE.blog[i].text}</p>
@@ -30,25 +30,9 @@ function clearSearchHandler() {
 	});
 }
 
-function gotoPageHandler() {
-	$('.page-nav').on('click', 'a', function( event ) {
-		event.preventDefault();
-		let text = $(this).html();
-		let pgnum = 0;
-		if ( text.localeCompare("First") === 0 ) {
-			pgnum = 0;
-		} else if ( text.localeCompare("Last") === 0 ) {
-			pgnum = Math.ceil( STORE.blog.length / ENTRIES_PER_PAGE ) - 1;
-		} else {
-			pgnum = Number( text ) - 1;
-		}
-		console.log( `pgnum: ${pgnum}` );
-		displayBlog( pgnum * ENTRIES_PER_PAGE );
-	});
-}
-
 async function main() {
 	await commonMain();
+	$('body').data('entries-per-page', ENTRIES_PER_PAGE );
 
 	$(searchBlogHander);
 	$(clearSearchHandler);

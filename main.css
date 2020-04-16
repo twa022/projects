@@ -358,6 +358,34 @@ main section > div {
 	display: inline-block;
 }
 
+.page-nav button {
+	background-color: lightgrey;
+	color: black;
+	text-align: center;
+	border: grey solid 2px;
+	border-radius: 8px;
+}
+
+.page-nav button.current-page {
+	background-color: black;
+	color: white;
+	border: black solid 2px;
+}
+
+/*
+.page-nav button.nav-prev-page, .page-nav button.nav-next-page {
+	background-color: blue;
+	color: white;
+	border: blue solid 2px;
+}
+*/
+
+.page-nav button.nav-first-page, .page-nav button.nav-last-page {
+	background-color: #E82A40;
+	color: white;
+	border: #E82A40 solid 2px;
+}
+
 legend {
 	display: none;
 }

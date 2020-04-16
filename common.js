@@ -79,7 +79,9 @@ async function generateLinks() {
 			$('.banner-slider').css({'left': '0%'});
 		}
 	);
-	if ( restartSlideshow ) startSlideshow();
+	if ( restartSlideshow ) {
+		startSlideshow();
+	}
 }
 
 function slidePrev() {
@@ -94,7 +96,9 @@ function slidePrev() {
 		1200, 
 		function() { $('.banner-slider').css('left', '0%'); }
 	);
-	if ( restartSlideshow ) startSlideshow();
+	if ( restartSlideshow ) {
+		startSlideshow();
+	}
 }
 
 function startSlideshow() {
@@ -147,22 +151,39 @@ function displayNav( page, entriesPerPage ) {
 	let html = '';
 	let currentPage = Number($(`.${page}-entry:first-child`).data('idx')) / entriesPerPage;
 	let numPages = Math.ceil( STORE[page].length / entriesPerPage );
+	console.log( `currentPage: ${currentPage}, numPages: ${numPages}` );
 	let first = currentPage - 2;
-	if ( first < 0 ) first = 0;
+	if ( first < 0 ) {
+		first = 0;
+	}
 	let last = currentPage + 2;
-	if ( last - first < 4 ) last = first + 4;
-	if ( last >= numPages ) last = numPages - 1;
+	if ( last - first < 4 ) {
+		last = first + 4;
+	}
+	if ( last >= numPages ) {
+		last = numPages - 1;
+	}
 	console.log(`"${$(`.${page}-entry:first-child`).data('idx')}" first: ${first} last ${last}`)
-	if ( first > 0 ) html += `<li><a href='#' style="text-decoration: underline">First</a></li> `;
+	if ( first > 0 ) {
+		html += `<li><button class="btn-page-nav nav-first-page" aria-label="First Page"><i class="fas fa-angle-double-left"></i></button></li> `;
+	}
+	if ( numPages > 1 && currentPage != 0 ) {
+		html += `<li><button class="btn-page-nav nav-prev-page" aria-label="Previous Page"><i class="fas fa-angle-left"></i></button></li> `;
+	}
 	for ( let i = first ; i <= last ; i++ ) {
 		if ( i === currentPage ) {
-			html += `<li><a>${i + 1}</a></li> `;
+			html += `<li><button class="btn-page-nav current-page" disabled>${i + 1}</i></button></li> `;
 		} else {
-			html += `<li><a href='#' style="text-decoration: underline">${i + 1}</a></li> `;
+			html += `<li><button class="btn-page-nav">${i + 1}</i></button></li> `;
 		}
 	}
-	if ( last < numPages - 1 ) html += `<li><a href='#' style="text-decoration: underline">Last</a></li>`;
-
+	if ( numPages > 1 && currentPage < numPages - 1 ) {
+		html += `<li><button class="btn-page-nav nav-next-page" aria-label="Next Page"><i class="fas fa-angle-right"></i></button></li> `;
+	}
+	if ( last < numPages - 1 ) {
+		html += `<li><button class="btn-page-nav nav-last-page" aria-label="Last Page"><i class="fas fa-angle-double-right"></i></button></li> `;
+	}
+	
 	$('.page-nav').find('ul').html( html );
 }
 
@@ -240,6 +261,31 @@ function pauseSlideshowHandler() {
 		$('.btn-pause').find('i').toggleClass('fa-pause');
 		$('.btn-pause').find('i').toggleClass('fa-play');
 	})
+}
+
+function gotoPageHandler() {
+	$('.page-nav').on('click', '.btn-page-nav', function( event ) {
+		event.preventDefault();
+		const page = $('body').data('page-prefix');
+		console.log(`page: ${page}`);
+		const entriesPerPage = Number( $('body').data('entries-per-page') );
+		const currentPage = Number($(`.${page}-entry:first-child`).data('idx')) / entriesPerPage;
+		const numPages = Math.ceil( STORE[page].length / entriesPerPage );
+		let pageNum;
+		if ( $(this).hasClass( 'nav-first-page' ) ) {
+			pageNum = 0;
+		} else if ( $(this).hasClass( 'nav-prev-page' ) ) {
+			pageNum = currentPage - 1;
+		} else if ( $(this).hasClass( 'nav-next-page' ) ) {
+			pageNum = currentPage + 1;
+		} else if ( $(this).hasClass( 'nav-last-page' ) ) {
+			pageNum = numPages - 1;
+		} else {
+			pageNum = Number( $(this).html() ) - 1;
+		}
+		console.log( `pageNum: ${pageNum}` );
+		displayBlog( pageNum * ENTRIES_PER_PAGE );
+	});
 }
 
 async function commonMain() {
