@@ -91,7 +91,11 @@ nav > ul {
 
 nav.main-menu li {
 	margin-right: 6px;
-	margin-left: 6px;
+	/*margin-left: 6px;*/
+}
+
+nav.main-menu li:not(:nth-child(1)):before {
+	content: "| ";
 }
 
 nav a {
