@@ -1,16 +1,21 @@
 #!/bin/bash
 
+function fail() {
+	echo "$1"
+	exit 1
+}
+
 # Make sure we're in a git directory
-git status >/dev/null 2>&1 || ( echo "Not currently in a git repository" ; exit 1 )
+git status >/dev/null 2>&1 || fail "Not currently in a git repository"
 
 
 curBranch="$( git rev-parse --abbrev-ref HEAD )"
 # Don't deploy from gh-pages to gh-pages
-[[ "${curBranch}" == "gh-pages" ]] && ( echo "Cannot deploy from gh-pages branch" ; exit 1 )
+[[ "${curBranch}" == "gh-pages" ]] && fail "Cannot deploy from gh-pages branch"
 
 # Delete and create a new gh-pages branch
 git branch -d gh-pages
-git checkout -b gh-pages || ( echo "Failed to checkout new branch gh-pages" ; exit 1 )
+git checkout -b gh-pages || fail "Failed to checkout new branch gh-pages"
 
 # Remove logging statements from javascript files.
 find . -type f -name "*.js" -exec sed -i -e '/console.log/d' '{}' \;
