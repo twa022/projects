@@ -93,7 +93,7 @@ nav > ul {
 	display: none;
 }
 
-nav li {
+nav.main-menu li {
 	margin-right: 6px;
 	margin-left: 6px;
 }
