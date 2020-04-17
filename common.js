@@ -151,6 +151,10 @@ function displayNav( page, entriesPerPage ) {
 	let html = '';
 	let currentPage = Number($(`.${page}-entry:first-child`).data('idx')) / entriesPerPage;
 	let numPages = Math.ceil( STORE[page].length / entriesPerPage );
+	if ( numPages === 1 ) {
+		$('.page-nav').addClass('no-display');
+		return;
+	}
 	console.log( `currentPage: ${currentPage}, numPages: ${numPages}` );
 	let first = currentPage - 2;
 	if ( first < 0 ) {
@@ -179,8 +183,6 @@ function displayNav( page, entriesPerPage ) {
 	}
 	if ( numPages > 1 && currentPage < numPages - 1 ) {
 		html += `<li><button class="btn-page-nav nav-next-page" aria-label="Next Page"><i class="fas fa-angle-right"></i></button></li> `;
-	}
-	if ( last < numPages - 1 ) {
 		html += `<li><button class="btn-page-nav nav-last-page" aria-label="Last Page"><i class="fas fa-angle-double-right"></i></button></li> `;
 	}
 	
@@ -285,6 +287,7 @@ function gotoPageHandler() {
 		}
 		console.log( `pageNum: ${pageNum}` );
 		displayPage( pageNum * ENTRIES_PER_PAGE );
+		window.scrollTo(0, 0);
 	});
 }
 
