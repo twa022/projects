@@ -263,6 +263,7 @@ main {
 
 main > section {
 	position: relative;
+	display: inline-block;
 	margin: 5px;
 	border: black 2px solid;
 	width: calc(100% - 10px);
