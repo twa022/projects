@@ -14,7 +14,7 @@ function generateGallery( id ) {
 	$('.gallery-slider').html( html );
 }
 
-function displayProjects( first=0 ) {
+function displayPage( first=0 ) {
 	let html = '';
 	if ( first >= STORE.projects.length ) first = STORE.projects.length - ENTRIES_PER_PAGE;
 	if ( first < 0 ) first = 0;
@@ -89,7 +89,7 @@ async function main() {
 	await commonMain();
 	$('body').data('entries-per-page', ENTRIES_PER_PAGE );
 
-	displayProjects();
+	displayPage();
 	$(galleryHandler);
 	$(galleryNextHandler);
 	$(galleryPrevHandler);

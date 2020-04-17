@@ -1,7 +1,7 @@
 
 const ENTRIES_PER_PAGE = 2;
 
-function displayBlog( first ) {
+function displayPage( first ) {
 	let html = '';
 	if ( first >= STORE.blog.length ) first = STORE.blog.length - ENTRIES_PER_PAGE;
 	if ( first < 0 ) first = 0;
@@ -38,7 +38,7 @@ async function main() {
 	$(clearSearchHandler);
 	$(gotoPageHandler);
 	
-	displayBlog( 0 );
+	displayPage( 0 );
 }
 
 $(document).ready( function() { main() } );

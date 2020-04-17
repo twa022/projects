@@ -284,7 +284,7 @@ function gotoPageHandler() {
 			pageNum = Number( $(this).html() ) - 1;
 		}
 		console.log( `pageNum: ${pageNum}` );
-		displayBlog( pageNum * ENTRIES_PER_PAGE );
+		displayPage( pageNum * ENTRIES_PER_PAGE );
 	});
 }
 

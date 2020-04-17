@@ -2,6 +2,10 @@ main {
 	display: block;
 }
 
+.projects-entries {
+	width: 100%;
+}
+
 .projects-entry {
 	position: relative;
 	float: left;
