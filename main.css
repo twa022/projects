@@ -94,11 +94,8 @@ nav > ul {
 }
 
 nav li {
-	list-style: none;
-}
-
-nav.main-menu li:not(:nth-child(1))::before {
-	content: " | ";
+	margin-right: 6px;
+	margin-left: 6px;
 }
 
 nav a {
