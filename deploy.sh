@@ -14,7 +14,7 @@ curBranch="$( git rev-parse --abbrev-ref HEAD )"
 [[ "${curBranch}" == "gh-pages" ]] && fail "Cannot deploy from gh-pages branch"
 
 # Delete and create a new gh-pages branch
-git branch -d gh-pages
+git branch -D gh-pages
 git checkout -b gh-pages || fail "Failed to checkout new branch gh-pages"
 
 # Remove logging statements from javascript files.
