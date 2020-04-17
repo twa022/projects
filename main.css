@@ -296,6 +296,34 @@ main section > div {
 	border-bottom: rgba(100, 100, 100, 0.8) solid 2px;
 }
 
+
+form {
+	position: relative;
+	width: 70%;
+	max-width: 450px;
+	left: 50%;
+	margin: 1.0rem;
+	transform: translateX(-50%);
+}
+
+input[type="text"] {
+	padding: 5px;
+	width: 100%;
+	border: black 2px solid;
+}
+
+#clear-field {
+	position: absolute;
+	right: 5px;
+	background-color: unset;
+	border: none;
+	/*border: black solid 2px;
+	border-radius: 100%;
+	font-size: 1.0rem; */
+	top: 50%;
+	transform: translateY(-50%);
+}
+
 .last-child-no-border-bottom *:last-child {
 	border-bottom: none;
 }
