@@ -306,7 +306,7 @@ form {
 	transform: translateX(-50%);
 }
 
-input[type="text"] {
+.search-field {
 	padding: 5px;
 	width: 100%;
 	border: black 2px solid;
