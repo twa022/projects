@@ -97,7 +97,7 @@ nav li {
 }
 
 nav.main-menu li:not(:nth-child(1))::before {
-	content: "| ";
+	content: " | ";
 }
 
 nav a {
