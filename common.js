@@ -297,7 +297,9 @@ function gotoPageHandler() {
  */
 function clearSearchHandler() {
 	$('#clear-search').click( function( event ) {
+		event.preventDefault();
 		$('.search-field').val('');
+		$('#clear-search').addClass('no-display');
 		/* TOOD: reset search function */
 	})
 }
@@ -317,6 +319,7 @@ function searchSubmitHandler() {
 			event.stopPropagation();
 			event.preventDefault();
 			$('.search-field').val('');
+			$('#clear-search').addClass('no-display');
 			/* TOOD: reset search function */
 		}
 	});
@@ -328,6 +331,7 @@ function searchSubmitHandler() {
  */
 function searchHandler() {
 	$('.search-field').on('input', function( event ) {
+		$('#clear-search').removeClass('no-display');
 		console.log(`Searching for ${$('.search-field').val()}`);
 		/* TOOD: perform search function */
 	});

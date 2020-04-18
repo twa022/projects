@@ -6,6 +6,7 @@
 :root {
 	--header-height: 5.0rem;
 	--max-width: 1100px;
+	--red: #E82A40;
 }
 
 .background, .header-background {
@@ -408,9 +409,13 @@ form {
 }
 
 .page-nav button.nav-first-page, .page-nav button.nav-last-page {
-	background-color: #E82A40;
+	background-color: var(--red);
 	color: white; 
-	border: #E82A40 solid 2px;
+	border: var(--red) solid 2px;
+}
+
+.red {
+	color: var(--red);
 }
 
 legend {
