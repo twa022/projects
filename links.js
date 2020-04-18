@@ -3,8 +3,10 @@ const ENTRIES_PER_PAGE = 2;
 
 function displayPage( first ) {
 	let html = '';
-	if ( first >= STORE.links.length ) first = STORE.links.length - ENTRIES_PER_PAGE;
-	if ( first < 0 ) first = 0;
+	if ( first >= STORE.links.length ) {
+		first = STORE.links.length - ENTRIES_PER_PAGE;
+	}
+	first = ( first < 0 ) ? 0 : first;
 
 	for ( let i = first ; i < STORE.links.length && i < first + ENTRIES_PER_PAGE ; i++ ) {
 		html +=

@@ -16,11 +16,13 @@ function generateGallery( id ) {
 
 function displayPage( first=0 ) {
 	let html = '';
-	if ( first >= STORE.projects.length ) first = STORE.projects.length - ENTRIES_PER_PAGE;
-	if ( first < 0 ) first = 0;
+	if ( first >= STORE.projects.length ) {
+		first = STORE.projects.length - ENTRIES_PER_PAGE;
+	}
+	first = ( first < 0 ) ? 0 : first;
 
 	for ( let i = first ; i < STORE.projects.length && i < first + ENTRIES_PER_PAGE ; i++ ) {
-		let project = STORE.projects[i];
+		const project = STORE.projects[i];
 		html += `
 		<div class="projects-entry" data-id="${project.id}" data-idx=${i}>
 			<h3><a href="${project.link}">${project.title}</a></h3>
@@ -51,7 +53,7 @@ function galleryNext() {
 
 function galleryPrev() {
 	console.log('sliding to previous');
-	let width = Number($('.gallery-item:first-child').width());
+	const width = Number($('.gallery-item:first-child').width());
 	$('.gallery-item:first-child').before($('.gallery-item:last-child'));
 	$('.gallery-slider').css({'left': `${ -1 * width }px`} );
 	$('.gallery-slider').animate(

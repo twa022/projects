@@ -86,9 +86,9 @@ async function generateLinks() {
 
 function slidePrev() {
 	console.log('sliding to previous');
-	let restartSlideshow = $('.btn-pause').find('i').attr('class').includes('fa-pause')
+	const restartSlideshow = $('.btn-pause').find('i').attr('class').includes('fa-pause')
 	stopSlideshow();
-	let width = Number($('.banner-item:first-child').width());
+	const width = Number($('.banner-item:first-child').width());
 	$('.banner-item:first-child').before($('.banner-item:last-child'));
 	$('.banner-slider').css({'left': `${ -1 * width }px`} );
 	$('.banner-slider').animate(
@@ -138,7 +138,7 @@ async function loadStore( file ) {
 function overlayBoxIn( className ) {
 	$('.overlay-layer').fadeIn();
 	$('.hamburger-menu').fadeOut();
-	let pad = Number($('header').css('padding-right').replace('px', ''));
+	const pad = Number($('header').css('padding-right').replace('px', ''));
 	$(`.${className}`).css("right", ( $(window).width() - $('header').width() ) / 2 - pad );
 	$(`.${className}`).fadeIn();
 }
@@ -149,17 +149,15 @@ function overlayOut() {
 
 function displayNav( page, entriesPerPage ) {
 	let html = '';
-	let currentPage = Number($(`.${page}-entry:first-child`).data('idx')) / entriesPerPage;
-	let numPages = Math.ceil( STORE[page].length / entriesPerPage );
+	const currentPage = Number($(`.${page}-entry:first-child`).data('idx')) / entriesPerPage;
+	const numPages = Math.ceil( STORE[page].length / entriesPerPage );
 	if ( numPages === 1 ) {
 		$('.page-nav').addClass('no-display');
+		$('.entries').addClass('last-child-no-border-bottom');
 		return;
 	}
 	console.log( `currentPage: ${currentPage}, numPages: ${numPages}` );
-	let first = currentPage - 2;
-	if ( first < 0 ) {
-		first = 0;
-	}
+	const first = ( currentPage - 2 > 0 ) ? currentPage - 2 : 0;
 	let last = currentPage + 2;
 	if ( last - first < 4 ) {
 		last = first + 4;
@@ -169,10 +167,10 @@ function displayNav( page, entriesPerPage ) {
 	}
 	console.log(`"${$(`.${page}-entry:first-child`).data('idx')}" first: ${first} last ${last}`)
 	if ( first > 0 ) {
-		html += `<li><button class="btn-page-nav nav-first-page" aria-label="First Page"><i class="fas fa-angle-double-left"></i></button></li> `;
+		html += `<li><button class="btn-page-nav nav-first-page" aria-label="first-page"><i class="fas fa-angle-double-left"></i></button></li> `;
 	}
 	if ( numPages > 1 && currentPage != 0 ) {
-		html += `<li><button class="btn-page-nav nav-prev-page" aria-label="Previous Page"><i class="fas fa-angle-left"></i></button></li> `;
+		html += `<li><button class="btn-page-nav nav-prev-page" aria-label="previous-page"><i class="fas fa-angle-left"></i></button></li> `;
 	}
 	for ( let i = first ; i <= last ; i++ ) {
 		if ( i === currentPage ) {
@@ -246,8 +244,8 @@ function bannerPrevHandler() {
 
 function resizeHandler() {
 	$(window).resize( function( event ) {
-		let pad = Number($('header').css('padding-right').replace('px', ''));
-		let rightOffset = ( $(window).width() - $('header').width() ) / 2 - pad;
+		const pad = Number($('header').css('padding-right').replace('px', ''));
+		const rightOffset = ( $(window).width() - $('header').width() ) / 2 - pad;
 		$('.hamburger-menu').css("right", rightOffset );
 		$('.contact').css("right", rightOffset );
 		$('.bio').css("right", rightOffset );

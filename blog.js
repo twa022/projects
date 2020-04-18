@@ -1,10 +1,12 @@
 
 const ENTRIES_PER_PAGE = 2;
 
-function displayPage( first ) {
+function displayPage( first = 0 ) {
 	let html = '';
-	if ( first >= STORE.blog.length ) first = STORE.blog.length - ENTRIES_PER_PAGE;
-	if ( first < 0 ) first = 0;
+	if ( first >= STORE.blog.length ) {
+		first = STORE.blog.length - ENTRIES_PER_PAGE;
+	}
+	first = ( first < 0 ) ? 0 : first;
 
 	for ( let i = first ; i < STORE.blog.length && i < first + ENTRIES_PER_PAGE ; i++ ) {
 		html +=
