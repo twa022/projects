@@ -94,6 +94,11 @@ async function main() {
 	$(galleryNextHandler);
 	$(galleryPrevHandler);
 	$(gotoPageHandler);
+	// Search field handlers
+	$(clearSearchHandler);
+	$(searchHandler);
+	$(searchSubmitHandler);
+
 }
 
 $(document).ready( function() { main() } );

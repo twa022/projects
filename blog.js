@@ -18,25 +18,16 @@ function displayPage( first ) {
 	displayNav( 'blog', ENTRIES_PER_PAGE );
 }
 
-function searchBlogHander() {
-	$('#blog-search-field').on('change', function( event ) {
-		console.log(`searching for ${$('#blog-search-field').val()}`);
-	});
-}
-
-function clearSearchHandler() {
-	$('#clear-field').click( function( event ) {
-		$('#blog-search-field').val('');
-	});
-}
-
 async function main() {
 	await commonMain();
 	$('body').data('entries-per-page', ENTRIES_PER_PAGE );
 
-	$(searchBlogHander);
 	$(clearSearchHandler);
 	$(gotoPageHandler);
+	// Search field handlers
+	$(clearSearchHandler);
+	$(searchHandler);
+	$(searchSubmitHandler);
 	
 	displayPage( 0 );
 }

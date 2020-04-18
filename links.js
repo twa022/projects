@@ -17,25 +17,17 @@ function displayPage( first ) {
 	displayNav( 'links', ENTRIES_PER_PAGE );
 }
 
-function searchLinksHander() {
-	$('#links-search-field').on('change', function( event ) {
-		console.log(`searching for ${$('#links-search-field').val()}`);
-	});
-}
-
-function clearSearchHandler() {
-	$('#clear-field').click( function( event ) {
-		$('#links-search-field').val('');
-	});
-}
-
 async function main() {
 	await commonMain();
 	$('body').data('entries-per-page', ENTRIES_PER_PAGE );
 
-	$(searchLinksHander);
 	$(clearSearchHandler);
 	$(gotoPageHandler);
+	// Search field handlers
+	$(clearSearchHandler);
+	$(searchHandler);
+	$(searchSubmitHandler);
+
 	
 	displayPage( 0 );
 }

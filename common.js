@@ -291,6 +291,49 @@ function gotoPageHandler() {
 	});
 }
 
+/**
+ * Event handler when the clear search field button is clicked
+ * (Clear the search field and reset the list of displayed quizzes to default (starts at index 0, no filter))
+ */
+function clearSearchHandler() {
+	$('#clear-search').click( function( event ) {
+		$('.search-field').val('');
+		/* TOOD: reset search function */
+	})
+}
+
+/**
+ * Handle special keypresses in the search quiz list input
+ */
+function searchSubmitHandler() {
+	$('.search-field').on('keydown', function( event ) {
+		// Enter key should not submit the form
+		if (event.keyCode === 13) {
+			event.stopPropagation();
+			event.preventDefault();
+		}
+		// Escape key should clear the field and reset the search.
+		if (event.keyCode === 27) {
+			event.stopPropagation();
+			event.preventDefault();
+			$('.search-field').val('');
+			/* TOOD: reset search function */
+		}
+	});
+}
+
+/**
+ * Event handler when user enters / changes the search term in the quiz list search field.
+ * Called any time the text in the input field changes
+ */
+function searchHandler() {
+	$('.search-field').on('input', function( event ) {
+		console.log(`Searching for ${$('.search-field').val()}`);
+		/* TOOD: perform search function */
+	});
+}
+
+
 async function commonMain() {
 	// Activate all the event handlers
 	$(hamburgerMenuHandler);
