@@ -8,7 +8,7 @@ function generateGallery( id ) {
 		html += 
 			`<div class="gallery-item">
 					<img src="${i.image}" alt="${i.alt}">
-					<p>${i.caption}</p>
+					<div class="gallery-caption">${i.caption}</div>
 			</div>`;
 	});
 	$('.gallery-slider').html( html );
