@@ -81,6 +81,10 @@ header * {
 	display: inline-block;
 }
 
+header > *:nth-child(1) {
+	margin-right: 20px;
+}
+
 nav.main-menu {
 	text-align: right;
 	font-size: 1.4rem;
@@ -435,6 +439,10 @@ fieldset {
 }
 
 @media screen and ( min-width: 800px ) {
+	header > h1 {
+		white-space: nowrap;
+	}
+
 	main {
 		flex-direction: row;
 		justify-content: space-between;
