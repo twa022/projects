@@ -25,7 +25,9 @@ function displayPage( first=0 ) {
 		const project = STORE.projects[i];
 		html += `
 		<div class="projects-entry" data-id="${project.id}" data-idx=${i}>
-			<h3><a href="${project.link}">${project.title}</a></h3>
+			<div class="projects-name">
+				<h3><a href="${project.link}">${project.title}</a></h3>
+			</div>
 			<div class="project-summary">
 				<div class="project-image">
 					<img src="${project.gallery[0].image}" alt="${project.gallery[0].alt} picture">

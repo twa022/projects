@@ -8,10 +8,9 @@ main {
 
 .projects-entry {
 	position: relative;
-	float: left;
+	overflow: hidden;
 	width: 100%;
-	padding-top: calc( 1.6rem + 20px );
-	font-size: 1.4rem;
+	font-size: 1.2rem;
 }
 
 .project-image {
@@ -22,7 +21,7 @@ main {
 	max-width: 500px;
 	min-height: 50px;
 	margin-right: 12px;
-	margin-bottom: 12px;
+	margin-bottom: 6px;
 }
 
 .projects-entry img {
@@ -30,14 +29,14 @@ main {
 	width: 100%;
 }
 
-.projects-entry h3 {
-	font-size: 1.6rem;
+.projects-name {
 	margin-bottom: 10px;
-	position: absolute;
-	top: 5px;
-	left: 0;
-	margin-left: 25%;
-	transform: translateX(-50%);
+	text-align: center
+}
+
+.projects-entry h3 {
+	font-size: 1.4rem;
+	white-space: wrap;
 }
 
 .projects-entry a {
