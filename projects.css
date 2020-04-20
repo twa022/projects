@@ -61,11 +61,11 @@ main {
 	width: 80%;
 	min-width: 240px;
 	max-width: 720px;
-	height: 400px;
-	min-height: 400px;
+	height: 80%;
 	top: 200px;
 	left: 50%;
-	transform: translateX(-50%);
+	top: 50%;
+	transform: translate(-50%, -50%);
 	border-radius: 6px;
 }
 
@@ -120,4 +120,11 @@ main {
 	box-shadow: 0 0 8px 10px rgba( 255, 255, 255, 0.8);
 	border-radius: 6px;
 	
+}
+
+@media screen and ( min-height: 500px ) {
+	.gallery {
+		height: 400px;
+		min-height: 400px;
+	}
 }
