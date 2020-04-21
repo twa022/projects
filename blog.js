@@ -14,11 +14,13 @@ function displayBlogs( first = 0, filter = "", hasResults = false ) {
 		first = elems.length - 1;
 	}
 	first = ( first < 0 ) ? 0 : first;
+
+	if ( !searchRequiresDisplayUpdate( first ) ) {
+		return;
+	}
+	
 	let html = '';
-	console.log( `first: ${first}, elems.length: ${elems.length}, first + ENTRIES_PER_PAGE: ${first + ENTRIES_PER_PAGE}` );
 	for ( let i = first ; i < elems.length && i < first + ENTRIES_PER_PAGE ; i++ ) {
-		console.log('adding to the results html');
-		console.log(`${elems[i]}, ${STORE.blog[elems[i]].image}, ${STORE.blog[elems[i]].title}, ${STORE.blog[elems[i]].text}`);
 		html +=
 			`<div class="blog-entry" data-idx=${elems[i]}>
 				<img class="blog-img" src="${STORE.blog[elems[i]].image}" alt="${STORE.blog[elems[i]].title}">
@@ -26,7 +28,6 @@ function displayBlogs( first = 0, filter = "", hasResults = false ) {
 				<p>${STORE.blog[elems[i]].text}</p>
 			</div>`;
 	}
-	console.log(`html: ${html}`);
 	$('.blog-entries').html( html );
 	displayNav( 'blog', ENTRIES_PER_PAGE );
 }

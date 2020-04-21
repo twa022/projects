@@ -14,17 +14,17 @@ function displayLinks( first = 0, filter = "", hasResults = false ) {
 		first = elems.length - 1;
 	}
 	first = ( first < 0 ) ? 0 : first;
+	if ( !searchRequiresDisplayUpdate( first ) ) {
+		return;
+	}
 	let html = '';
-	console.log( `first: ${first}, elems.length: ${elems.length}, first + ENTRIES_PER_PAGE: ${first + ENTRIES_PER_PAGE}` );
 	for ( let i = first ; i < elems.length && i < first + ENTRIES_PER_PAGE ; i++ ) {
-		console.log('adding to the results html');
 		html +=
 			`<div class="links-entry" data-idx=${elems[i]}>
 				<h3><a href="${STORE.links[elems[i]].link}">${STORE.links[elems[i]].title} <i class="fas fa-external-link-alt"></i></a></h3>
 				<p>${STORE.links[elems[i]].text}</p>
 			</div>`;
 	}
-	console.log(`html: ${html}`);
 	$('.links-entries').html( html );
 	displayNav( 'links', ENTRIES_PER_PAGE );
 }

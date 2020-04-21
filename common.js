@@ -191,6 +191,26 @@ function displayNav( page, entriesPerPage ) {
 	$('.page-nav').find('ul').html( html );
 }
 
+function searchRequiresDisplayUpdate( first ) {
+	const page = $('body').data('page-prefix');
+	const elems = ( STORE.hasOwnProperty( 'results' ) ) ? STORE.results : [...Array(STORE[page].length).keys()];
+	let displayed = [];
+	$(`.${page}-entry`).each( function() {
+		displayed.push( $(this).data('idx') );
+	});
+	console.log( `displayed: ${displayed}` );
+	let updateDisplay = ( elems.length === 0 && displayed.length != 0 );
+	let i = 0 ;
+	while ( !updateDisplay && i < elems.length && i < first + ENTRIES_PER_PAGE ) {
+		console.log( `${displayed[i - first]}, ${elems[i]}` );
+		if ( displayed[i - first] != elems[i] ) {
+			updateDisplay = true;
+		}
+		i++;
+	}
+	console.log(`updateDisplay: ${updateDisplay}`);
+	return updateDisplay;
+}
 
 /********************************
  *        EVENT HANDLERS        *

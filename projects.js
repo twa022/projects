@@ -15,10 +15,11 @@ function displayProjects( first = 0, filter = "", hasResults = false ) {
 		first = elems.length - 1;
 	}
 	first = ( first < 0 ) ? 0 : first;
+	if ( !searchRequiresDisplayUpdate( first ) ) {
+		return;
+	}
 	let html = '';
-	console.log( `first: ${first}, elems.length: ${elems.length}, first + ENTRIES_PER_PAGE: ${first + ENTRIES_PER_PAGE}` );
 	for ( let i = first ; i < elems.length && i < first + ENTRIES_PER_PAGE ; i++ ) {
-		console.log('adding to the results html');
 		const project = STORE.projects[elems[i]];
 		html += `
 		<div class="projects-entry" data-id="${project.id}" data-idx=${i}>
@@ -34,7 +35,6 @@ function displayProjects( first = 0, filter = "", hasResults = false ) {
 			</div>
 		</div>`
 	}
-	console.log(`html: ${html}`);
 	$('.projects-entries').html( html );
 	displayNav( 'projects', ENTRIES_PER_PAGE );
 }
