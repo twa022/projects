@@ -1,7 +1,22 @@
 "using strict";
 
+/********************************
+ *           GLOBALS            *
+ ********************************/
+
+/** Maximum number of projects to show per page */
 const ENTRIES_PER_PAGE = 2;
 
+/********************************
+ *          FUNCTIONS           *
+ ********************************/
+
+/**
+ * Display the projects starting from a certain index with an option filter
+ * @param {Number}  first      - The first index from the matching results to display
+ * @param {String}  filter     - An optional search filter to apply
+ * @param {Boolean} hasResults - Whether or not results have already been generated for the filter
+ */
 function displayProjects( first = 0, filter = "", hasResults = false ) {
 	if ( !hasResults ) {
 		if ( filter ) {
@@ -10,16 +25,22 @@ function displayProjects( first = 0, filter = "", hasResults = false ) {
 			delete STORE.results;
 		}
 	}
+	// list of the indices in STORE.blog that match the filter; or if no filter
+	// just an array of the indices of the STORE.blog array (0..length - 1)
 	const elems = ( STORE.hasOwnProperty( 'results' ) ) ? STORE.results : [...Array(STORE.projects.length).keys()];
 	if ( first >= elems.length ) {
 		first = elems.length - 1;
 	}
 	first = ( first < 0 ) ? 0 : first;
+	// Don't repaint the screen if not required
 	if ( !searchRequiresDisplayUpdate( first ) ) {
+		// But do repaint the nav buttons (the visible search results might not have changed, but the
+		// whole search results array might have grown or shrunk...
 		displayNav( 'projects', ENTRIES_PER_PAGE );
 		return;
 	}
 	let html = '';
+	// Feedback if nothing found
 	if ( elems.length === 0 ) {
 		html += `<div class="no-results"> <p>No ${ ( filter || hasResults ) ? 'search results' : 'projects'} found.</p> </div>`;
 	}
@@ -44,19 +65,35 @@ function displayProjects( first = 0, filter = "", hasResults = false ) {
 	displayNav( 'projects', ENTRIES_PER_PAGE );
 }
 
-
+/**
+ * Display the projects with no filters
+ */
 function resetSearch() {
 	displayProjects();
 }
 
+/**
+ * Search the projects for a certain term and display the matching results
+ * @param {String} term - The search term to search the blog entries against
+ */
 function search( term = "" ) {
 	displayProjects( 0, term );
 }
 
+/**
+ * Display a certain page of the projects with the filter currently in use
+ * @param {Number} page - The page number (zero-indexed) to display
+ */
 function displayPage( page = 0 ) {
 	displayProjects( page * ENTRIES_PER_PAGE, "", true );
 }
 
+/**
+ * Perform a search of the projects for the term provided and store the indices
+ * that match in STORE.results
+ * @param {String} term - The search term to search against
+ * @sideeffects - STORE.results is updated with the indices that match this search
+ */
 function performSearch( term = "" ) {
 	const terms = term.toLowerCase().split('/\s+');
 	STORE.results = [];
@@ -71,7 +108,10 @@ function performSearch( term = "" ) {
 	console.log(`Searched for ${term}: elements matching: ${STORE.results}`);
 }
 
-
+/**
+ * Generate the gallery slideshow for a project
+ * @param {Number} id - The project id (STORE.projects.id from store.json)
+ */
 function generateGallery( id ) {
 	let html = '';
 	const gallery = STORE.projects.find( e => Number(e.id) === Number(id) ).gallery;
@@ -90,11 +130,14 @@ function generateGallery( id ) {
 	$('.gallery-slider').html( html );
 }
 
+/**
+ * Advance the slideshow gallery to the next slide.
+ */
 function galleryNext() {
 	console.log('sliding to next');
 	$('.gallery-slider').animate(
 		{ left: `-=${Number($('.gallery-item:first-child').width())}px` },
-		1200, 
+		ANIMATION_TIME_MS, 
 		function() {
 			$('.gallery-item:last-child').after($('.gallery-item:first-child'));
 			$('.gallery-slider').css({'left': '0%'});
@@ -102,6 +145,9 @@ function galleryNext() {
 	);
 }
 
+/**
+ * Advance the slideshow gallery to the previous slide.
+ */
 function galleryPrev() {
 	console.log('sliding to previous');
 	const width = Number($('.gallery-item:first-child').width());
@@ -109,11 +155,19 @@ function galleryPrev() {
 	$('.gallery-slider').css({'left': `${ -1 * width }px`} );
 	$('.gallery-slider').animate(
 		{ left: `+=${width}` },
-		1200, 
+		ANIMATION_TIME_MS, 
 		function() { $('.gallery-slider').css('left', '0%'); }
 	);
 }
 
+/********************************
+ *        EVENT HANDLERS        *
+ ********************************/
+
+/**
+ * Event handler when the project image is clicked to display the project gallery.
+ * Generates the gallery and displays it as an overlay box
+ */
 function galleryHandler() {
 	$('.projects-entries').on('click', 'img', function( event ) {
 		event.stopPropagation();
@@ -124,6 +178,10 @@ function galleryHandler() {
 	})
 }
 
+/**
+ * Event handler when the next slide button on the gallery is activated
+ * Advances the slideshow to the next slide.
+ */
 function galleryNextHandler() {
 	$('#gallery-next').click( function( event ) {
 		console.log('gallery-next');
@@ -131,6 +189,10 @@ function galleryNextHandler() {
 	});
 }
 
+/**
+ * Event handler when the previous slide button on the gallery is activated
+ * Advances the slideshow to the previous slide.
+ */
 function galleryPrevHandler() {
 	$('#gallery-prev').click( function( event ) {
 		console.log('gallery-prev');
@@ -138,8 +200,15 @@ function galleryPrevHandler() {
 	});
 }
 
+/**
+ * Main function run on page load. Activates all event handlers and displays the projects from STORE
+ */
 async function main() {
+	// Have to wait for this to finish since commonMain loads the STORE and we need it to populate the page
 	await commonMain();
+
+	// Certain common functions need to know the value of ENTRIES_PER_PAGE
+	// Put it as a data attribute on the body element so it can be retrieved
 	$('body').data('entries-per-page', ENTRIES_PER_PAGE );
 
 	displayPage();
