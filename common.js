@@ -17,11 +17,19 @@ const KEYPRESS_ENTER = 13;
  *          FUNCTIONS           *
  ********************************/
 
+/**
+ * Generate the bio from the STORE and update the page
+ * (Bio is not displayed by default)
+ */
 async function generateBio() {
 	$('.bio-image').html(`<img src=${STORE.bio.image} alt="Ted Alff">`);
 	$('.bio-text').html(STORE.bio.text);
 }
 
+/**
+ * Load the STORE variable from the json file
+ * @param {String} file - The json to load
+ */
 async function loadStore( file ) {
 	try {
 		let response = await fetch( file );
@@ -37,6 +45,10 @@ async function loadStore( file ) {
 	}
 }
 
+/**
+ * Display the overlay layer and the overlay box that has the class specified
+ * @param {String} className - a class identifier for the overlay box to be displayed
+ */
 function overlayBoxIn( className ) {
 	$('.overlay-layer').fadeIn();
 	$('.hamburger-menu').fadeOut();
@@ -45,10 +57,18 @@ function overlayBoxIn( className ) {
 	$(`.${className}`).fadeIn();
 }
 
+/**
+ * Close the overlay box and layer
+ */
 function overlayOut() {
 	$('.overlay-box').fadeOut( function() { $('.overlay-layer').fadeOut(); } );
 }
 
+/**
+ * Display page navigation links
+ * @param {String} page - the page prefix of the current page -- The key in STORE that corresponds to the page's data
+ * @param {Number} entriesPerPage - The number of entries to display per page
+ */
 function displayNav( page, entriesPerPage ) {
 	let html = '';
 	const elems = ( STORE.hasOwnProperty( 'results' ) ) ? STORE.results : [...Array(STORE[page].length).keys()];
@@ -96,6 +116,13 @@ function displayNav( page, entriesPerPage ) {
 	$('.page-nav').find('ul').html( html );
 }
 
+/**
+ * Return whether or not a search requires the display to be updated
+ * (If the new search would display the same search results as the current view, there's no point
+ * to repainting which causes the element to flash)
+ * @param {Number} first - The first index of the results that will be displayed
+ * @return {Boolean} - Whether or not the displayed entries match the entries that would be displayed based on current results
+ */
 function searchRequiresDisplayUpdate( first ) {
 	const page = $('body').data('page-prefix');
 	const elems = ( STORE.hasOwnProperty( 'results' ) ) ? STORE.results : [...Array(STORE[page].length).keys()];
@@ -108,9 +135,7 @@ function searchRequiresDisplayUpdate( first ) {
 	let i = 0 ;
 	while ( !updateDisplay && i < elems.length && i < first + ENTRIES_PER_PAGE ) {
 		console.log( `${displayed[i - first]}, ${elems[i]}` );
-		if ( displayed[i - first] != elems[i] ) {
-			updateDisplay = true;
-		}
+		updateDisplay = displayed[i - first] != elems[i];
 		i++;
 	}
 	console.log(`updateDisplay: ${updateDisplay}`);
@@ -121,6 +146,10 @@ function searchRequiresDisplayUpdate( first ) {
  *        EVENT HANDLERS        *
  ********************************/
 
+/**
+ * Event handler when the hamburger menu button is pressed (smaller screen menu)
+ * Displays the menu as an overlay
+ */
 function hamburgerMenuHandler() {
 	$('.hamburger').click( function( event ) { 
 		event.preventDefault();
@@ -129,12 +158,10 @@ function hamburgerMenuHandler() {
 	});
 }
 
-function homeLinkHandler() {
-	$('.home-link').click( function( event ) {
-		overlayOut();
-	})
-}
-
+/**
+ * Event handler when the contact link is clicked
+ * Displays contact links as an overlay
+ */
 function contactLinkHandler() {
 	$('.contact-link').click( function( event ) { 
 		event.preventDefault();
@@ -143,6 +170,10 @@ function contactLinkHandler() {
 	});
 }
 
+/**
+ * Event handler when the bio link is clicked
+ * Displays the bio as an overlay
+ */
 function bioLinkHandler() {
 	$('.bio-link').click( function( event ) { 
 		event.preventDefault();
@@ -151,23 +182,33 @@ function bioLinkHandler() {
 	});
 }
 
+/**
+ * Event handler when the overlay layer is clicked (fades out the overlay).
+ * The overlay layer completely covers the page except the overlay box, so when an overlay
+ * box is visible, clicking anywhere outside that box on the page will activate the handler.
+ */
 function overlayOutHandler() {
 	$('.overlay-layer').click( function( event ) {
 		overlayOut();
 	});
 }
 
+/**
+ * Event handler activated when the page is resized.
+ * The overlays have to have their right offset dynamically calculated to position correctly
+ */
 function resizeHandler() {
 	$(window).resize( function( event ) {
 		const pad = Number($('header').css('padding-right').replace('px', ''));
 		const rightOffset = ( $(window).width() - $('header').width() ) / 2 - pad;
-		$('.hamburger-menu').css("right", rightOffset );
-		$('.contact').css("right", rightOffset );
-		$('.bio').css("right", rightOffset );
-		//$('.overlay-layer').click();
+		$('.overlay-box').css("right", rightOffset );
 	});
 }
 
+/**
+ * Event handler activated when a page navigation button is clicked.
+ * Displays the requested page of the current search results
+ */
 function gotoPageHandler() {
 	$('.page-nav').on('click', '.btn-page-nav', function( event ) {
 		event.preventDefault();
@@ -246,7 +287,11 @@ function searchHandler() {
 	});
 }
 
-
+/**
+ * Common function that should be run (and completed) before the page specific functions are run.
+ * All pages that reference data from STORE should call await commonMain(); first before
+ * referencing any data from STORE.
+ */
 async function commonMain() {
 	// Activate all the event handlers
 	$(hamburgerMenuHandler);

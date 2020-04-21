@@ -151,6 +151,17 @@ function toggleSlideshow( start ) {
  ********************************/
 
 /**
+ * Event handler when the home link is clicked 
+ * No need to reload the page since we're already on the home page
+ */
+function homeLinkHandler() {
+	$('.home-link').click( function( event ) {
+		event.preventDefault();
+		overlayOut();
+	})
+}
+
+/**
  * Event handler when the next slide button on the projects banner is activated
  * Advances the slideshow to the next slide.
  */
