@@ -149,9 +149,13 @@ function overlayOut() {
 
 function displayNav( page, entriesPerPage ) {
 	let html = '';
-	const currentPage = Number($(`.${page}-entry:first-child`).data('idx')) / entriesPerPage;
-	const numPages = Math.ceil( STORE[page].length / entriesPerPage );
-	if ( numPages === 1 ) {
+	const elems = ( STORE.hasOwnProperty( 'results' ) ) ? STORE.results : [...Array(STORE[page].length).keys()];
+	console.log( `Elems: ${elems}: ${elems.length}` );
+	const curFirstIdx = Number($(`.${page}-entry:first-child`).data('idx'));
+	const currentPage = Math.floor( elems.indexOf( curFirstIdx ) / entriesPerPage );
+	const numPages = Math.ceil( elems.length / entriesPerPage );
+	// If there are zero or one pages, we don't need the nav buttons
+	if ( numPages <= 1 ) {
 		$('.page-nav').addClass('no-display');
 		$('.entries').addClass('last-child-no-border-bottom');
 		return;
@@ -269,8 +273,9 @@ function gotoPageHandler() {
 		const page = $('body').data('page-prefix');
 		console.log(`page: ${page}`);
 		const entriesPerPage = Number( $('body').data('entries-per-page') );
-		const currentPage = Number($(`.${page}-entry:first-child`).data('idx')) / entriesPerPage;
-		const numPages = Math.ceil( STORE[page].length / entriesPerPage );
+		const elems = ( STORE.hasOwnProperty( 'results' ) ) ? STORE.results : [...Array(STORE[page].length).keys()];
+		const currentPage = elems.indexOf(Number($(`.${page}-entry:first-child`).data('idx'))) / entriesPerPage;
+		const numPages = Math.ceil( elems.length / entriesPerPage );
 		let pageNum;
 		if ( $(this).hasClass( 'nav-first-page' ) ) {
 			pageNum = 0;
@@ -284,7 +289,7 @@ function gotoPageHandler() {
 			pageNum = Number( $(this).html() ) - 1;
 		}
 		console.log( `pageNum: ${pageNum}` );
-		displayPage( pageNum * ENTRIES_PER_PAGE );
+		displayPage( pageNum * entriesPerPage );
 		window.scrollTo(0, 0);
 	});
 }
@@ -298,7 +303,7 @@ function clearSearchHandler() {
 		event.preventDefault();
 		$('.search-field').val('');
 		$('#clear-search').addClass('no-display');
-		/* TOOD: reset search function */
+		resetSearch();
 	})
 }
 
@@ -318,7 +323,7 @@ function searchSubmitHandler() {
 			event.preventDefault();
 			$('.search-field').val('');
 			$('#clear-search').addClass('no-display');
-			/* TOOD: reset search function */
+			resetSearch();
 		}
 	});
 }
@@ -331,7 +336,7 @@ function searchHandler() {
 	$('.search-field').on('input', function( event ) {
 		$('#clear-search').removeClass('no-display');
 		console.log(`Searching for ${$('.search-field').val()}`);
-		/* TOOD: perform search function */
+		search( $('.search-field').val() );
 	});
 }
 

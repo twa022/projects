@@ -2,6 +2,71 @@
 
 const ENTRIES_PER_PAGE = 2;
 
+function displayProjects( first = 0, filter = "", hasResults = false ) {
+	if ( !hasResults ) {
+		if ( filter ) {
+			performSearch( filter );
+		} else {
+			delete STORE.results;
+		}
+	}
+	const elems = ( STORE.hasOwnProperty( 'results' ) ) ? STORE.results : [...Array(STORE.projects.length).keys()];
+	if ( first >= elems.length ) {
+		first = elems.length - 1;
+	}
+	first = ( first < 0 ) ? 0 : first;
+	let html = '';
+	console.log( `first: ${first}, elems.length: ${elems.length}, first + ENTRIES_PER_PAGE: ${first + ENTRIES_PER_PAGE}` );
+	for ( let i = first ; i < elems.length && i < first + ENTRIES_PER_PAGE ; i++ ) {
+		console.log('adding to the results html');
+		const project = STORE.projects[elems[i]];
+		html += `
+		<div class="projects-entry" data-id="${project.id}" data-idx=${i}>
+			<div class="projects-name">
+				<h3><a href="${project.link}">${project.title}</a></h3>
+			</div>
+			<div class="project-summary">
+				<div class="project-image">
+					<img src="${project.gallery[0].image}" alt="${project.gallery[0].alt} picture">
+					<div class="entry-gallery-text">Click for Gallery</div>
+				</div>
+				${project.text}
+			</div>
+		</div>`
+	}
+	console.log(`html: ${html}`);
+	$('.projects-entries').html( html );
+	displayNav( 'projects', ENTRIES_PER_PAGE );
+}
+
+
+function resetSearch() {
+	displayProjects();
+}
+
+function search( term = "" ) {
+	displayProjects( 0, term );
+}
+
+function displayPage( page = 0 ) {
+	displayProjects( page * ENTRIES_PER_PAGE, "", true );
+}
+
+function performSearch( term = "" ) {
+	const terms = term.toLowerCase().split('/\s+');
+	STORE.results = [];
+	for ( let i = 0 ; i < STORE.projects.length ; i++ ) {
+		let match = terms.every( function( t ) {
+			return STORE.projects[i].title.toLowerCase().includes( t ) || STORE.projects[i].text.toLowerCase().includes( t );
+		});
+		if ( match ) {
+			STORE.results.push(i);
+		}
+	}
+	console.log(`Searched for ${term}: elements matching: ${STORE.results}`);
+}
+
+
 function generateGallery( id ) {
 	let html = '';
 	const gallery = STORE.projects.find( e => Number(e.id) === Number(id) ).gallery;
@@ -20,7 +85,7 @@ function generateGallery( id ) {
 	$('.gallery-slider').html( html );
 }
 
-function displayPage( first=0 ) {
+function _displayPage( first=0 ) {
 	let html = '';
 	if ( first >= STORE.projects.length ) {
 		first = STORE.projects.length - ENTRIES_PER_PAGE;
