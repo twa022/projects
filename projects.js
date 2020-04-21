@@ -16,9 +16,14 @@ function displayProjects( first = 0, filter = "", hasResults = false ) {
 	}
 	first = ( first < 0 ) ? 0 : first;
 	if ( !searchRequiresDisplayUpdate( first ) ) {
+		displayNav( 'projects', ENTRIES_PER_PAGE );
 		return;
 	}
 	let html = '';
+	if ( elems.length === 0 ) {
+		html += `<div class="no-results"> <p>No ${ ( filter || hasResults ) ? 'search results' : 'projects'} found.</p> </div>`;
+	}
+			
 	for ( let i = first ; i < elems.length && i < first + ENTRIES_PER_PAGE ; i++ ) {
 		const project = STORE.projects[elems[i]];
 		html += `

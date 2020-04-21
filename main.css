@@ -418,6 +418,11 @@ form {
 	color: var(--red);
 }
 
+.no-results {
+	margin: auto;
+	text-align: center;
+}
+
 legend {
 	display: none;
 }

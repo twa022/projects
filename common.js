@@ -159,6 +159,9 @@ function displayNav( page, entriesPerPage ) {
 		$('.page-nav').addClass('no-display');
 		$('.entries').addClass('last-child-no-border-bottom');
 		return;
+	} else {
+		$('.page-nav').removeClass('no-display');
+		$('.entries').removeClass('last-child-no-border-bottom');
 	}
 	console.log( `currentPage: ${currentPage}, numPages: ${numPages}` );
 	const first = ( currentPage - 2 > 0 ) ? currentPage - 2 : 0;
@@ -199,7 +202,7 @@ function searchRequiresDisplayUpdate( first ) {
 		displayed.push( $(this).data('idx') );
 	});
 	console.log( `displayed: ${displayed}` );
-	let updateDisplay = ( elems.length === 0 && displayed.length != 0 );
+	let updateDisplay = ( STORE[page].length === 0 || ( elems.length === 0 && displayed.length != 0 ) );
 	let i = 0 ;
 	while ( !updateDisplay && i < elems.length && i < first + ENTRIES_PER_PAGE ) {
 		console.log( `${displayed[i - first]}, ${elems[i]}` );

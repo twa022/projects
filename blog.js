@@ -16,10 +16,14 @@ function displayBlogs( first = 0, filter = "", hasResults = false ) {
 	first = ( first < 0 ) ? 0 : first;
 
 	if ( !searchRequiresDisplayUpdate( first ) ) {
+		displayNav( 'blog', ENTRIES_PER_PAGE );
 		return;
 	}
 	
 	let html = '';
+	if ( elems.length === 0 ) {
+		html += `<div class="no-results"> <p>No ${ ( filter || hasResults ) ? 'search results' : 'blog entries'} found.</p> </div>`;
+	}
 	for ( let i = first ; i < elems.length && i < first + ENTRIES_PER_PAGE ; i++ ) {
 		html +=
 			`<div class="blog-entry" data-idx=${elems[i]}>

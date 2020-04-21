@@ -15,9 +15,13 @@ function displayLinks( first = 0, filter = "", hasResults = false ) {
 	}
 	first = ( first < 0 ) ? 0 : first;
 	if ( !searchRequiresDisplayUpdate( first ) ) {
+		displayNav( 'links', ENTRIES_PER_PAGE );
 		return;
 	}
 	let html = '';
+	if ( elems.length === 0 ) {
+		html += `<div class="no-results"> <p>No ${ ( filter || hasResults ) ? 'search results' : 'links'} found.</p> </div>`;
+	}
 	for ( let i = first ; i < elems.length && i < first + ENTRIES_PER_PAGE ; i++ ) {
 		html +=
 			`<div class="links-entry" data-idx=${elems[i]}>
