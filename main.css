@@ -37,8 +37,7 @@ body {
 .ctr-main {
 	position: relative;
 	max-width: var(--max-width);
-	left: 50%;
-	transform: translateX(-50%);
+	margin: auto;
 }
 
 header {
@@ -67,12 +66,6 @@ header, .banner, .slider-container, main, main > section, .background {
 	border-bottom-left-radius: 20px;*/
 }
 
-/*
-header > *:not(:nth-child(1)) {
-	margin-left: 10px;
-}
-*/
-
 .nowrap {
 	white-space: nowrap;
 }
@@ -96,7 +89,6 @@ nav > ul {
 
 nav.main-menu li {
 	margin-right: 6px;
-	/*margin-left: 6px;*/
 }
 
 nav.main-menu li:not(:nth-child(1)):before {
@@ -187,8 +179,7 @@ nav a {
 
 .banner {
 	position: relative;
-	left: 50%;
-	transform: translateX(-50%);
+	margin: auto;
 	width: 90%;
 	max-width: var(--max-width);
 	height: 200px;
@@ -258,8 +249,7 @@ main {
 	max-width: var(--max-width);
 	min-height: 1px;
 	position: relative;
-	left: 50%;
-	transform: translateX(-50%);
+	margin: auto;
 	margin-bottom: 20px;
 }
 
@@ -305,9 +295,9 @@ form {
 	position: relative;
 	width: 70%;
 	max-width: 450px;
-	left: 50%;
-	margin: 1.0rem;
-	transform: translateX(-50%);
+	margin: auto;
+	margin-top: 1.0rem;
+	margin-bottom: 1.0rem;	
 }
 
 .search-field {
