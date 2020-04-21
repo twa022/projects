@@ -334,6 +334,11 @@ function searchSubmitHandler() {
  */
 function searchHandler() {
 	$('.search-field').on('input', function( event ) {
+		if ( ! $('.search-field').val() ) {
+			$('#clear-search').addClass('no-display');
+			resetSearch();
+			return;
+		}
 		$('#clear-search').removeClass('no-display');
 		console.log(`Searching for ${$('.search-field').val()}`);
 		search( $('.search-field').val() );
