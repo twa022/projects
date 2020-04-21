@@ -85,33 +85,6 @@ function generateGallery( id ) {
 	$('.gallery-slider').html( html );
 }
 
-function _displayPage( first=0 ) {
-	let html = '';
-	if ( first >= STORE.projects.length ) {
-		first = STORE.projects.length - ENTRIES_PER_PAGE;
-	}
-	first = ( first < 0 ) ? 0 : first;
-
-	for ( let i = first ; i < STORE.projects.length && i < first + ENTRIES_PER_PAGE ; i++ ) {
-		const project = STORE.projects[i];
-		html += `
-		<div class="projects-entry" data-id="${project.id}" data-idx=${i}>
-			<div class="projects-name">
-				<h3><a href="${project.link}">${project.title}</a></h3>
-			</div>
-			<div class="project-summary">
-				<div class="project-image">
-					<img src="${project.gallery[0].image}" alt="${project.gallery[0].alt} picture">
-					<div class="entry-gallery-text">Click for Gallery</div>
-				</div>
-				${project.text}
-			</div>
-		</div>`
-	}
-	$('.projects-entries').html( html );
-	displayNav( 'projects', ENTRIES_PER_PAGE );
-}
-
 function galleryNext() {
 	console.log('sliding to next');
 	$('.gallery-slider').animate(
