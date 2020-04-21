@@ -206,6 +206,7 @@ async function main() {
 	$(bannerPrevHandler);
 	$(bannerNextHandler);
 	$(pauseSlideshowHandler);
+	$(homeLinkHandler);
 
 	generateBanner();
 	startSlideshow();

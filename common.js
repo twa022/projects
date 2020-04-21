@@ -295,7 +295,6 @@ function searchHandler() {
 async function commonMain() {
 	// Activate all the event handlers
 	$(hamburgerMenuHandler);
-	$(homeLinkHandler);
 	$(contactLinkHandler);
 	$(bioLinkHandler);
 	$(overlayOutHandler);
