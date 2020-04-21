@@ -131,7 +131,7 @@ function searchRequiresDisplayUpdate( first ) {
 		displayed.push( $(this).data('idx') );
 	});
 	console.log( `displayed: ${displayed}` );
-	let updateDisplay = ( elems.length != displayed.length || STORE[page].length === 0 );
+	let updateDisplay = ( ( elems.length != displayed.length && elems.length <= ENTRIES_PER_PAGE ) || STORE[page].length === 0 );
 	let i = 0 ;
 	while ( !updateDisplay && i < elems.length && i < first + ENTRIES_PER_PAGE ) {
 		console.log( `${displayed[i - first]}, ${elems[i]}` );
