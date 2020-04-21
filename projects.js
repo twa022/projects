@@ -4,19 +4,18 @@ const ENTRIES_PER_PAGE = 2;
 
 function generateGallery( id ) {
 	let html = '';
-	STORE.projects.find( e => Number(e.id) === Number(id) ).gallery.forEach( function( i ) {
+	const gallery = STORE.projects.find( e => Number(e.id) === Number(id) ).gallery;
+	gallery.forEach( function( i ) {
 		html += 
 			`<div class="gallery-item">
 					<img src="${i.image}" alt="${i.alt}">
 					<div class="gallery-caption">${i.caption}</div>
 			</div>`;
 	});
-	if ( STORE.projects.find( e => Number(e.id) === Number(id) ).gallery.length <= 1 ) {
-		$('#gallery-next').addClass('no-display');
-		$('#gallery-prev').addClass('no-display');
+	if ( gallery.length <= 1 ) {
+		$('.gallery .btn-arrow').addClass('no-display');
 	} else {
-		$('#gallery-next').removeClass('no-display');
-		$('#gallery-prev').removeClass('no-display');
+		$('.gallery .btn-arrow').removeClass('no-display');
 	}
 	$('.gallery-slider').html( html );
 }
