@@ -22,7 +22,7 @@ find . -type f -name "*.js" -exec sed -i -e '/console.log/d' '{}' \;
 
 # Minify html, js, json, and css files
 find . -mindepth 1 -maxdepth 2 -type f -name "*.js" -exec minify '{}' -o '{}' \;
-find . -mindepth 1 -maxdepth 2 -type f -name "*.html" -exec minify '{}' -o '{}' \;
+#find . -mindepth 1 -maxdepth 2 -type f -name "*.html" -exec minify '{}' -o '{}' \;
 find . -mindepth 1 -maxdepth 2 -type f -name "*.css" -exec minify '{}' -o '{}' \;
 find . -mindepth 1 -maxdepth 2 -type f -name "*.json" -exec minify '{}' -o '{}' \;
 
