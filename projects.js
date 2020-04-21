@@ -11,6 +11,13 @@ function generateGallery( id ) {
 					<div class="gallery-caption">${i.caption}</div>
 			</div>`;
 	});
+	if ( STORE.projects.find( e => Number(e.id) === Number(id) ).gallery.length <= 1 ) {
+		$('#gallery-next').addClass('no-display');
+		$('#gallery-prev').addClass('no-display');
+	} else {
+		$('#gallery-next').removeClass('no-display');
+		$('#gallery-prev').removeClass('no-display');
+	}
 	$('.gallery-slider').html( html );
 }
 
