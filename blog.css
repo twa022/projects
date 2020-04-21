@@ -11,9 +11,29 @@
 }
 
 .blog-img {
+	display: block;
+	width: 80%;
+	margin: 0 auto;
+}
+
+.blog-entry > h3 {
+	text-align: center;
+}
+
+.blog-entry > .blog-text {
+	width: 100%;
+}
+
+.blog-text p {
+	margin-top: 0;
+}
+
+@media screen and ( min-width: 450px ) {
+	.blog-img {
 	display: inline-block;
-	width: 40%;
-	float: left;
-	margin-right: 12px;
-	margin-bottom: 12px;
+		width: 40%;
+		float: left;
+		margin-right: 12px;
+		margin-bottom: 6px;
+	}
 }

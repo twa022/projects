@@ -48,9 +48,9 @@ function displayBlogs( first = 0, filter = "", hasResults = false ) {
 	for ( let i = first ; i < elems.length && i < first + ENTRIES_PER_PAGE ; i++ ) {
 		html +=
 			`<div class="blog-entry" data-idx=${elems[i]}>
-				<img class="blog-img" src="${STORE.blog[elems[i]].image}" alt="${STORE.blog[elems[i]].title}">
 				<h3>${STORE.blog[elems[i]].title}</h3>
-				<p>${STORE.blog[elems[i]].text}</p>
+				<img class="blog-img" src="${STORE.blog[elems[i]].image}" alt="${STORE.blog[elems[i]].title}">
+				<div class="blog-text">${STORE.blog[elems[i]].text}</div>
 			</div>`;
 	}
 	$('.blog-entries').html( html );
