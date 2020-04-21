@@ -199,8 +199,12 @@ function overlayOutHandler() {
  */
 function resizeHandler() {
 	$(window).resize( function( event ) {
-		const pad = Number($('header').css('padding-right').replace('px', ''));
-		const rightOffset = ( $(window).width() - $('header').width() ) / 2 - pad;
+		const currentWidth = $(window).width();
+		if ( currentWidth === STORE.oldWidth ) {
+			return;
+		}
+		STORE.oldWidth = currentWidth;
+		const rightOffset = ( currentWidth - $('header').width() ) / 2 - STORE.headerPad;
 		$('.overlay-box').css("right", rightOffset );
 	});
 }
@@ -301,6 +305,9 @@ async function commonMain() {
 	$(resizeHandler);
 
 	await loadStore( 'store.json' );
+	STORE.oldWidth = $( window ).width();
+	STORE.headerPad = Number($('header').css('padding-right').replace('px', ''));
+
 	console.log( STORE.projects[0].title );
 
 	generateBio();
