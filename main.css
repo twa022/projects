@@ -43,9 +43,9 @@ body {
 header {
 	position: fixed;
 	width: 90%;
+	min-width: 288px;
 	max-width: var(--max-width);
-	left: 50%;
-	transform: translateX(-50%);
+	left: 16px;
 	top: 20px;
 	height: var(--header-height);
 	border: black solid 2px;
@@ -56,6 +56,15 @@ header {
 	padding-left: 20px;
 	padding-right: 20px;
 	z-index: 5;
+}
+
+/* Fixed element doesn't want to play nice when screen is squished < 320px, so default behavior is for
+ * < 320, and center above that... */
+@media screen and ( min-width: 320px ) {
+	header {
+		left: 50%;
+		transform: translateX(-50%);
+	}
 }
 
 header, .banner, .slider-container, main, main > section, .background {
@@ -192,7 +201,6 @@ nav a {
 
 .slider-container {
 	position: relative;
-	width: 100%;
 	height: 100%;
 	white-space: nowrap;
 	overflow: hidden;
