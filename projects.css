@@ -123,8 +123,7 @@ main {
 	padding: 4px;
 	padding-left: 6px;
 	padding-right: 6px;
-	overflow: hidden;
-	text-overflow: ellipsis;
+	overflow: auto;
 	max-height: 30%;
 	font-size: 1.2rem;
 	background-color: rgba( 225, 225, 225, 0.9);
