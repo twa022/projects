@@ -4,7 +4,6 @@
 }
 
 .blog-entry {
-	overflow: auto;
 	margin-top: 12px;
 }
 
@@ -33,5 +32,9 @@
 		float: left;
 		margin-right: 12px;
 		margin-bottom: 6px;
+	}
+
+	.blog-entries {
+		float: left;
 	}
 }

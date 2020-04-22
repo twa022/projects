@@ -284,8 +284,10 @@ main > section > div {
 }
 
 main > section > h2 {
-	width: 100%;
-	text-align: center;
+	display: inline-block;
+	position: relative;
+	left: 50%;
+	transform: translateX(-50%);
 	margin-bottom: 4px;
 }
 
@@ -390,7 +392,10 @@ form {
 }
 
 .page-nav {
-	text-align: center;
+	display: inline-block;
+	position: relative;
+	left: 50%;
+	transform: translateX(-50%);
 	font-size: 1.2rem;
 }
 
