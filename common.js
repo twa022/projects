@@ -69,8 +69,12 @@ function overlayOut() {
  * @param {String} page - the page prefix of the current page -- The key in STORE that corresponds to the page's data
  * @param {Number} entriesPerPage - The number of entries to display per page
  */
-function displayNav( page, entriesPerPage ) {
+function displayNav( page = undefined, entriesPerPage = undefined ) {
 	let html = '';
+	if ( !page || !entriesPerPage ) {
+		page = $('body').data('page-prefix');
+		entriesPerPage = Number( $('body').data('entries-per-page') );
+	}
 	const elems = ( STORE.hasOwnProperty( 'results' ) ) ? STORE.results : [...Array(STORE[page].length).keys()];
 	console.log( `Elems: ${elems}: ${elems.length}` );
 	const curFirstIdx = Number($(`.${page}-entry:first-child`).data('idx'));
@@ -86,10 +90,11 @@ function displayNav( page, entriesPerPage ) {
 		$('.entries').removeClass('last-child-no-border-bottom');
 	}
 	console.log( `currentPage: ${currentPage}, numPages: ${numPages}` );
-	const first = ( currentPage - 2 > 0 ) ? currentPage - 2 : 0;
-	let last = currentPage + 2;
-	if ( last - first < 4 ) {
-		last = first + 4;
+	const btnsToDisplay = ( $( window ).width() < 450 ) ? 1 : 2;
+	const first = ( currentPage - btnsToDisplay > 0 ) ? currentPage - btnsToDisplay : 0;
+	let last = currentPage + btnsToDisplay;
+	if ( last - first < btnsToDisplay * 2 ) {
+		last = first + btnsToDisplay * 2;
 	}
 	if ( last >= numPages ) {
 		last = numPages - 1;
@@ -203,9 +208,12 @@ function resizeHandler() {
 		if ( currentWidth === STORE.oldWidth ) {
 			return;
 		}
-		STORE.oldWidth = currentWidth;
 		const rightOffset = ( currentWidth - $('header').width() ) / 2 - STORE.headerPad;
 		$('.overlay-box').css("right", rightOffset );
+		if ( currentWidth > 450 ? STORE.oldWidth <= 450 : STORE.oldWidth > 450 ) {
+			displayNav();
+		}
+		STORE.oldWidth = currentWidth;
 	});
 }
 
@@ -235,7 +243,7 @@ function gotoPageHandler() {
 			pageNum = Number( $(this).html() ) - 1;
 		}
 		console.log( `pageNum: ${pageNum}` );
-		displayPage( pageNum * entriesPerPage );
+		displayPage( pageNum );
 		window.scrollTo(0, 0);
 	});
 }
