@@ -196,6 +196,18 @@ function pauseSlideshowHandler() {
 	})
 }
 
+function slideshowSwipeLeftHandler() {
+	$('.banner').on('swipeleft', function( event ) {
+		slideNext();
+	});
+}
+
+function slideshowSwipeRightHandler() {
+	$('.banner').on('swiperight', function( event ) {
+		slidePrev();
+	});
+}
+
 /**
  * Main function run on page load. Activates all event handlers and displays the projects banner,
  * blog summaries, and links summaries from STORE
@@ -207,6 +219,8 @@ async function main() {
 	$(bannerNextHandler);
 	$(pauseSlideshowHandler);
 	$(homeLinkHandler);
+	$(slideshowSwipeLeftHandler);
+	$(slideshowSwipeRightHandler);
 
 	generateBanner();
 	startSlideshow();

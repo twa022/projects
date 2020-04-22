@@ -200,6 +200,18 @@ function galleryPrevHandler() {
 	});
 }
 
+function gallerySwipeLeftHander() {
+	$('.gallery').on('swipeleft', function( event ) {
+		galleryNext();
+	});
+}
+
+function gallerySwipeRightHander() {
+	$('.gallery').on('swiperight', function( event ) {
+		galleryPrev();
+	});
+}
+
 /**
  * Main function run on page load. Activates all event handlers and displays the projects from STORE
  */
@@ -215,6 +227,8 @@ async function main() {
 	$(galleryHandler);
 	$(galleryNextHandler);
 	$(galleryPrevHandler);
+	$(gallerySwipeLeftHander);
+	$(gallerySwipeRightHander);
 	$(gotoPageHandler);
 	// Search field handlers
 	$(clearSearchHandler);
