@@ -19,3 +19,8 @@ nav li {
 .links-entry i {
 	margin-left: 5px;
 }
+
+
+.links-entry p {
+	width: 100%;
+}

@@ -284,6 +284,7 @@ main > section > div {
 }
 
 main > section > h2 {
+	width: 100%;
 	text-align: center;
 	margin-bottom: 4px;
 }
