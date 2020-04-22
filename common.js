@@ -75,6 +75,9 @@ function displayNav( page = undefined, entriesPerPage = undefined ) {
 		page = $('body').data('page-prefix');
 		entriesPerPage = Number( $('body').data('entries-per-page') );
 	}
+	if ( !page || !entriesPerPage ) {
+		return;
+	}
 	const elems = ( STORE.hasOwnProperty( 'results' ) ) ? STORE.results : [...Array(STORE[page].length).keys()];
 	console.log( `Elems: ${elems}: ${elems.length}` );
 	const curFirstIdx = Number($(`.${page}-entry:first-child`).data('idx'));
