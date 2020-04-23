@@ -69,22 +69,12 @@ function overlayOut() {
  * @param {String} page - the page prefix of the current page -- The key in STORE that corresponds to the page's data
  * @param {Number} entriesPerPage - The number of entries to display per page
  */
-function displayNav( page = undefined, entriesPerPage = undefined ) {
+function displayNav() {
 	let html = '';
-	if ( !page || !entriesPerPage ) {
-		page = $('body').data('page-prefix');
-		entriesPerPage = Number( $('body').data('entries-per-page') );
-	}
-	if ( !page || !entriesPerPage ) {
-		return;
-	}
-	const elems = ( STORE.hasOwnProperty( 'results' ) ) ? STORE.results : [...Array(STORE[page].length).keys()];
+	const elems = ( STORE.hasOwnProperty( 'results' ) ) ? STORE.results : [...Array(STORE[STORE.pagePrefix].length).keys()];
 	console.log( `Elems: ${elems}: ${elems.length}` );
-	const curFirstIdx = Number($(`.${page}-entry:first-child`).data('idx'));
-	const currentPage = Math.floor( elems.indexOf( curFirstIdx ) / entriesPerPage );
-	const numPages = Math.ceil( elems.length / entriesPerPage );
 	// If there are zero or one pages, we don't need the nav buttons
-	if ( numPages <= 1 ) {
+	if ( STORE.numPages <= 1 ) {
 		$('.page-nav').addClass('no-display');
 		$('.entries').addClass('last-child-no-border-bottom');
 		return;
@@ -92,31 +82,31 @@ function displayNav( page = undefined, entriesPerPage = undefined ) {
 		$('.page-nav').removeClass('no-display');
 		$('.entries').removeClass('last-child-no-border-bottom');
 	}
-	console.log( `currentPage: ${currentPage}, numPages: ${numPages}` );
+	const curFirstIdx = STORE.displayed[0];
+	console.log( `STORE.currentPage: ${STORE.currentPage}, STORE.numPages: ${STORE.numPages}` );
 	const btnsToDisplay = ( $( window ).width() < 450 ) ? 1 : 2;
-	const first = ( currentPage - btnsToDisplay > 0 ) ? currentPage - btnsToDisplay : 0;
-	let last = currentPage + btnsToDisplay;
+	const first = ( STORE.currentPage - btnsToDisplay > 0 ) ? STORE.currentPage - btnsToDisplay : 0;
+	let last = STORE.currentPage + btnsToDisplay;
 	if ( last - first < btnsToDisplay * 2 ) {
 		last = first + btnsToDisplay * 2;
 	}
-	if ( last >= numPages ) {
-		last = numPages - 1;
+	if ( last >= STORE.numPages ) {
+		last = STORE.numPages - 1;
 	}
-	console.log(`"${$(`.${page}-entry:first-child`).data('idx')}" first: ${first} last ${last}`)
 	if ( first > 0 ) {
 		html += `<li><button class="btn-page-nav nav-first-page" aria-label="first-page"><i class="fas fa-angle-double-left"></i></button></li> `;
 	}
-	if ( numPages > 1 && currentPage != 0 ) {
+	if ( STORE.numPages > 1 && STORE.currentPage != 0 ) {
 		html += `<li><button class="btn-page-nav nav-prev-page" aria-label="previous-page"><i class="fas fa-angle-left"></i></button></li> `;
 	}
 	for ( let i = first ; i <= last ; i++ ) {
-		if ( i === currentPage ) {
+		if ( i === STORE.currentPage ) {
 			html += `<li><button class="btn-page-nav current-page" disabled>${i + 1}</i></button></li> `;
 		} else {
 			html += `<li><button class="btn-page-nav">${i + 1}</i></button></li> `;
 		}
 	}
-	if ( numPages > 1 && currentPage < numPages - 1 ) {
+	if ( STORE.numPages > 1 && STORE.currentPage < STORE.numPages - 1 ) {
 		html += `<li><button class="btn-page-nav nav-next-page" aria-label="Next Page"><i class="fas fa-angle-right"></i></button></li> `;
 		html += `<li><button class="btn-page-nav nav-last-page" aria-label="Last Page"><i class="fas fa-angle-double-right"></i></button></li> `;
 	}
@@ -132,22 +122,78 @@ function displayNav( page = undefined, entriesPerPage = undefined ) {
  * @return {Boolean} - Whether or not the displayed entries match the entries that would be displayed based on current results
  */
 function searchRequiresDisplayUpdate( first ) {
-	const page = $('body').data('page-prefix');
-	const elems = ( STORE.hasOwnProperty( 'results' ) ) ? STORE.results : [...Array(STORE[page].length).keys()];
-	let displayed = [];
-	$(`.${page}-entry`).each( function() {
-		displayed.push( $(this).data('idx') );
-	});
-	console.log( `displayed: ${displayed}` );
-	let updateDisplay = ( ( elems.length != displayed.length && elems.length <= ENTRIES_PER_PAGE ) || STORE[page].length === 0 );
+	const elems = ( STORE.hasOwnProperty( 'results' ) ) ? STORE.results : [...Array(STORE[STORE.pagePrefix].length).keys()];
+	let updateDisplay = ( ( STORE.displayed.length === 0 && elems.length !== 0 ) || ( elems.length != STORE.displayed.length && elems.length <= ENTRIES_PER_PAGE ) || STORE[STORE.pagePrefix].length === 0 );
 	let i = 0 ;
 	while ( !updateDisplay && i < elems.length && i < first + ENTRIES_PER_PAGE ) {
-		console.log( `${displayed[i - first]}, ${elems[i]}` );
-		updateDisplay = displayed[i - first] != elems[i];
+		console.log( `${STORE.displayed[i - first]}, ${elems[i]}` );
+		updateDisplay = STORE.displayed[i - first] != elems[i];
 		i++;
 	}
 	console.log(`updateDisplay: ${updateDisplay}`);
 	return updateDisplay;
+}
+
+/**
+ * Display the links starting from a certain index with an option filter
+ * @param {Number}  first      - The first index from the matching results to display
+ * @param {String}  filter     - An optional search filter to apply
+ * @param {Boolean} hasResults - Whether or not results have already been generated for the filter
+ */
+function displayEntries( first = 0, filter = "", hasResults = false ) {
+	if ( !hasResults ) {
+		if ( filter ) {
+			performSearch( filter );
+		} else {
+			delete STORE.results;
+		}
+	}
+	// list of the indices in STORE[STORE.pagePrefix] that match the filter; or if no filter
+	// just an array of the indices of the STORE[STORE.pagePrefix] array (0..length - 1)
+	const elems = ( STORE.hasOwnProperty( 'results' ) ) ? STORE.results : [...Array(STORE[STORE.pagePrefix].length).keys()];
+	if ( first >= elems.length ) {
+		first = elems.length - 1;
+	}
+	first = ( first < 0 ) ? 0 : first;
+	if ( elems.length === 0 ) {
+		STORE.currentPage = 0;
+	} else {
+		STORE.currentPage = Math.floor( first / STORE.entriesPerPage );
+	}
+	STORE.numPages = Math.ceil( elems.length / STORE.entriesPerPage );
+
+	// Don't repaint the screen if not required
+	if ( !searchRequiresDisplayUpdate( first ) ) {
+		// But do repaint the nav buttons (the visible search results might not have changed, but the
+		// whole search results array might have grown or shrunk...
+		displayNav();
+		return;
+	}
+	$('.entries').html( getEntriesHtml( elems, first, filter, hasResults ) ); // This updates STORE.displayed
+	displayNav();
+}
+
+/**
+ * Display the links with no filters
+ */
+function resetSearch() {
+	displayEntries();
+}
+
+/**
+ * Search the links for a certain term and display the matching results
+ * @param {String} term - The search term to search the blog entries against
+ */
+function search( term = "" ) {
+	displayEntries( 0, term );
+}
+
+/**
+ * Display a certain page of the links with the filter currently in use
+ * @param {Number} page - The page number (zero-indexed) to display
+ */
+function displayPage( pageNum = 0 ) {
+	displayEntries( pageNum * STORE.entriesPerPage, "", true );
 }
 
 /********************************
@@ -227,21 +273,16 @@ function resizeHandler() {
 function gotoPageHandler() {
 	$('.page-nav').on('click', '.btn-page-nav', function( event ) {
 		event.preventDefault();
-		const page = $('body').data('page-prefix');
-		console.log(`page: ${page}`);
-		const entriesPerPage = Number( $('body').data('entries-per-page') );
-		const elems = ( STORE.hasOwnProperty( 'results' ) ) ? STORE.results : [...Array(STORE[page].length).keys()];
-		const currentPage = elems.indexOf(Number($(`.${page}-entry:first-child`).data('idx'))) / entriesPerPage;
-		const numPages = Math.ceil( elems.length / entriesPerPage );
+		const elems = ( STORE.hasOwnProperty( 'results' ) ) ? STORE.results : [...Array(STORE[STORE.pagePrefix].length).keys()];
 		let pageNum;
 		if ( $(this).hasClass( 'nav-first-page' ) ) {
 			pageNum = 0;
 		} else if ( $(this).hasClass( 'nav-prev-page' ) ) {
-			pageNum = currentPage - 1;
+			pageNum = STORE.currentPage - 1;
 		} else if ( $(this).hasClass( 'nav-next-page' ) ) {
-			pageNum = currentPage + 1;
+			pageNum = STORE.currentPage + 1;
 		} else if ( $(this).hasClass( 'nav-last-page' ) ) {
-			pageNum = numPages - 1;
+			pageNum = STORE.numPages - 1;
 		} else {
 			pageNum = Number( $(this).html() ) - 1;
 		}

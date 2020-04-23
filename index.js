@@ -215,6 +215,7 @@ function slideshowSwipeRightHandler() {
 async function main() {
 	// Have to wait for this to finish since commonMain loads the STORE and we need it to populate the page
 	await commonMain();
+
 	$(bannerPrevHandler);
 	$(bannerNextHandler);
 	$(pauseSlideshowHandler);

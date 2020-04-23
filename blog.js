@@ -12,40 +12,16 @@ const ENTRIES_PER_PAGE = 2;
  ********************************/
 
 /**
- * Display the blog posts starting from a certain index with an option filter
- * @param {Number}  first      - The first index from the matching results to display
- * @param {String}  filter     - An optional search filter to apply
- * @param {Boolean} hasResults - Whether or not results have already been generated for the filter
  */
-function displayBlogs( first = 0, filter = "", hasResults = false ) {
-	if ( !hasResults ) {
-		if ( filter ) {
-			performSearch( filter );
-		} else {
-			delete STORE.results;
-		}
-	}
-	// list of the indices in STORE.blog that match the filter; or if no filter
-	// just an array of the indices of the STORE.blog array (0..length - 1)
-	const elems = ( STORE.hasOwnProperty( 'results' ) ) ? STORE.results : [...Array(STORE.blog.length).keys()];
-	if ( first >= elems.length ) {
-		first = elems.length - 1;
-	}
-	first = ( first < 0 ) ? 0 : first;
-	// Don't repaint the screen if not required
-	if ( !searchRequiresDisplayUpdate( first ) ) {
-		// But do repaint the nav buttons (the visible search results might not have changed, but the
-		// whole search results array might have grown or shrunk...
-		displayNav( 'blog', ENTRIES_PER_PAGE );
-		return;
-	}
-	
+function getEntriesHtml( elems, first, filter, hasResults ) {
+	STORE.displayed = [];
 	let html = '';
 	// Feedback if nothing found
 	if ( elems.length === 0 ) {
 		html += `<div class="no-results"> <p>No ${ ( filter || hasResults ) ? 'search results' : 'blog entries'} found.</p> </div>`;
 	}
 	for ( let i = first ; i < elems.length && i < first + ENTRIES_PER_PAGE ; i++ ) {
+		STORE.displayed.push(elems[i]);
 		html +=
 			`<div class="blog-entry" data-idx=${elems[i]}>
 				<h3>${STORE.blog[elems[i]].title}</h3>
@@ -53,31 +29,7 @@ function displayBlogs( first = 0, filter = "", hasResults = false ) {
 				<div class="blog-text">${STORE.blog[elems[i]].text}</div>
 			</div>`;
 	}
-	$('.blog-entries').html( html );
-	displayNav( 'blog', ENTRIES_PER_PAGE );
-}
-
-/**
- * Display the blog posts with no filters
- */
-function resetSearch() {
-	displayBlogs();
-}
-
-/**
- * Display the blog posts with a search filter
- * @param {String} term - The search term to search the blog entries against
- */
-function search( term = "" ) {
-	displayBlogs( 0, term );
-}
-
-/**
- * Display a certain page of the blog posts with the filter currently in use
- * @param {Number} page - The page number (zero-indexed) to display
- */
-function displayPage( page = 0 ) {
-	displayBlogs( page * ENTRIES_PER_PAGE, "", true );
+	return html;
 }
 
 /**
@@ -106,11 +58,11 @@ function performSearch( term = "" ) {
 async function main() {
 	// Have to wait for this to finish since commonMain loads the STORE and we need it to populate the page
 	await commonMain();
-	
-	// Certain common functions need to know the value of ENTRIES_PER_PAGE
-	// Put it as a data attribute on the body element so it can be retrieved
-	$('body').data('entries-per-page', ENTRIES_PER_PAGE );
 
+	STORE.entriesPerPage = ENTRIES_PER_PAGE;
+	STORE.pagePrefix = 'blog';
+	STORE.displayed = [];
+	
 	$(clearSearchHandler);
 	$(gotoPageHandler);
 	// Search field handlers
@@ -118,7 +70,7 @@ async function main() {
 	$(searchHandler);
 	$(searchSubmitHandler);
 
-	displayBlogs();
+	displayPage( 0 );
 }
 
 $(document).ready( function() { main() } );

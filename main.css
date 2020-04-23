@@ -399,10 +399,6 @@ form {
 	border-bottom: lightgray 1px solid;
 }
 
-.no-display {
-	display: none;
-}
-
 .page-nav {
 	display: inline-block;
 	position: relative;
@@ -444,8 +440,11 @@ form {
 	color: var(--red);
 }
 
+.entries {
+	width: 100%;
+}
+
 .no-results {
-	margin: auto;
 	text-align: center;
 }
 
@@ -515,4 +514,8 @@ fieldset {
 	.bio {
 		max-width: 810px;
 	}
+}
+
+.no-display {
+	display: none;
 }
