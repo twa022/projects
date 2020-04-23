@@ -6,7 +6,6 @@
 	"projects": [
 		{
 			"title": "Quiz",
-			"id": 1,
 			"date": "20190311",
 			"image": "images/quiz-app.png",
 			"fontColor": "pink",
@@ -28,7 +27,6 @@
 		},
 		{
 			"title": "Apple Project",
-			"id": 2,
 			"date": "20190310",
 			"gallery": [
 				{
@@ -44,7 +42,6 @@
 		},
 		{
 			"title": "Tofu for Days",
-			"id": 3,
 			"date": "20190309",
 			"gallery": [
 				{

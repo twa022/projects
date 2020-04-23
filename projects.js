@@ -20,7 +20,7 @@ function getEntriesHtml( elems, first, hasResults ) {
 		const project = STORE.projects[elems[i]];
 		STORE.displayed.push(elems[i]);
 		html += `
-		<div class="projects-entry" data-id="${project.id}" data-idx=${i}>
+		<div class="projects-entry" data-id="${project.id}">
 			<div class="projects-name">
 				<h3><a href="${project.link}">${project.title}</a></h3>
 			</div>
@@ -62,7 +62,7 @@ function performSearch( term = "" ) {
  */
 function generateGallery( id ) {
 	let html = '';
-	const gallery = STORE.projects.find( e => Number(e.id) === Number(id) ).gallery;
+	const gallery = STORE.projects.find( e => e.id === id ).gallery;
 	gallery.forEach( function( i ) {
 		html += 
 			`<div class="gallery-item">
@@ -170,6 +170,7 @@ async function main() {
 	STORE.entriesPerPage = ENTRIES_PER_PAGE;
 	STORE.pagePrefix = 'projects';
 	STORE.displayed = [];
+	STORE.projects.forEach( p => p.id = cuid() );
 
 	$('.menu').find('.projects-link').addClass('current-page-link');
 	$(ownPageLinkHandler);

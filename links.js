@@ -23,7 +23,7 @@ function getEntriesHtml( elems, first, hasResults ) {
 		for ( let i = first ; i < elems.length && i < first + ENTRIES_PER_PAGE ; i++ ) {
 			STORE.displayed.push(elems[i]);
 			html +=
-				`<div class="links-entry" data-idx=${elems[i]}>
+				`<div class="links-entry">
 					<h3><a href="${STORE.links[elems[i]].link}">${STORE.links[elems[i]].title} <i class="fas fa-external-link-alt"></i></a></h3>
 					<p>${STORE.links[elems[i]].text}</p>
 				</div>`;

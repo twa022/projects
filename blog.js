@@ -23,7 +23,7 @@ function getEntriesHtml( elems, first, filter, hasResults ) {
 	for ( let i = first ; i < elems.length && i < first + ENTRIES_PER_PAGE ; i++ ) {
 		STORE.displayed.push(elems[i]);
 		html +=
-			`<div class="blog-entry" data-idx=${elems[i]}>
+			`<div class="blog-entry">
 				<h3>${STORE.blog[elems[i]].title}</h3>
 				<img class="blog-img" src="${STORE.blog[elems[i]].image}" alt="${STORE.blog[elems[i]].title}">
 				<div class="blog-text">${STORE.blog[elems[i]].text}</div>
