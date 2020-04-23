@@ -26,7 +26,6 @@ const MAX_LINKS = 3;
 async function generateBanner() {
 	let html = "";
 	for ( let i = 0 ; i < STORE.projects.length ; i++ ) {
-		// Placeholder HTML to test the banner.
 		html += `<a href="${STORE.projects[i].link}" data-idx=${i} class="banner-item"
 					style="color: ${STORE.projects[i].fontColor}">
 					<div class="banner-item-bgnd" style="background-image: linear-gradient( to bottom, rgba(50, 50, 50, 0.8), rgba( 100, 100, 100, 0.4) ), url('${STORE.projects[i].gallery[0].image}');"></div>
@@ -44,7 +43,6 @@ async function generateBanner() {
 async function generateBlog() {
 	let html = "";
 	for ( let i = 0 ; i < STORE.blog.length && i < MAX_BLOG_LINKS ; i++ ) {
-		// Placeholder HTML to test the banner.
 		html += `<div><a href="${STORE.blog[i].link}" data-idx=${i}
 					class="blog-link">
 					<div><h3>${STORE.blog[i].title}</h3>${STORE.blog[i].summary}</div></a></div>`;
@@ -63,7 +61,6 @@ async function generateBlog() {
 async function generateLinks() {
 	let html = "";
 	for ( let i = 0 ; i < STORE.links.length && i < MAX_LINKS ; i++ ) {
-		// Placeholder HTML to test the banner.
 		html += `<div><a href="${STORE.links[i].link}" data-idx=${i} target="_blank rel="noopener"
 					class="link">
 					<div><h3>${STORE.links[i].title}</h3>${STORE.links[i].summary}</div></a></div>`;
@@ -82,7 +79,7 @@ async function generateLinks() {
  */
 function slideNext() {
 	console.log('sliding to next');
-	let restartSlideshow = $('.btn-pause').find('i').attr('class').includes('fa-pause')
+	let restartSlideshow = STORE.slideshowPlaying;
 	stopSlideshow();
 	$('.banner-slider').animate(
 		{ left: `-=${Number($('.banner-item:first-child').width())}px` },
@@ -102,7 +99,7 @@ function slideNext() {
  */
 function slidePrev() {
 	console.log('sliding to previous');
-	const restartSlideshow = $('.btn-pause').find('i').attr('class').includes('fa-pause')
+	let restartSlideshow = STORE.slideshowPlaying;
 	stopSlideshow();
 	const width = Number($('.banner-item:first-child').width());
 	$('.banner-item:first-child').before($('.banner-item:last-child'));
@@ -122,7 +119,7 @@ function slidePrev() {
  * SLIDESHOW_AUTOADVANCE_MS / 1000 seconds
  */
 function startSlideshow() {
-	console.log('Starting slideshow');
+	STORE.slideshowPlaying = true;
 	TIMER = setInterval( function() { slideNext(); }, SLIDESHOW_AUTOADVANCE_MS );
 }
 
@@ -130,18 +127,20 @@ function startSlideshow() {
  * Stop the projects banner slideshow (disable autoadvance)
  */
 function stopSlideshow() {
-	console.log('Stopping slideshow');
+	STORE.slideshowPlaying = false;
 	clearInterval( TIMER );
 }
 
 /**
  * Toggle the projects banner slideshow (play if stopped, stop if playing)
  */
-function toggleSlideshow( start ) {
-	if ( start ) {
+function toggleSlideshow() {
+	if ( !STORE.slideshowPlaying ) {
 		startSlideshow();
+		console.log('Starting slideshow');
 		slideNext();
 	} else {
+		console.log('Stopping slideshow');
 		stopSlideshow();
 	}
 }
@@ -178,10 +177,8 @@ function bannerPrevHandler() {
 function pauseSlideshowHandler() {
 	$('.btn-pause').click( function( event ) {
 		event.stopPropagation();
-		console.log( $('.btn-pause').find('i').attr('class') );
-		toggleSlideshow( $('.btn-pause').find('i').attr('class').includes('fa-play') );
-		$('.btn-pause').find('i').toggleClass('fa-pause');
-		$('.btn-pause').find('i').toggleClass('fa-play');
+		toggleSlideshow();
+		$('.btn-pause').find('i').toggleClass('fa-pause').toggleClass('fa-play');
 	})
 }
 
@@ -197,6 +194,17 @@ function slideshowSwipeRightHandler() {
 	});
 }
 
+function handleVisibility() {
+	if (document.visibilityState === 'hidden') {
+		console.log('Pausing slideshow while page not visible');
+		STORE.slideshowResumeOnVisible = STORE.slideshowPlaying;
+		stopSlideshow();
+	} else if ( STORE.slideshowResumeOnVisible ) {
+		console.log('Resuming slideshow');
+		startSlideshow();
+	}
+}
+
 /**
  * Main function run on page load. Activates all event handlers and displays the projects banner,
  * blog summaries, and links summaries from STORE
@@ -207,6 +215,8 @@ async function main() {
 
 	$('.menu').find('.home-link').addClass('current-page-link');
 	$(ownPageLinkHandler);
+
+	document.addEventListener('visibilitychange', () => handleVisibility());
 
 	$(bannerPrevHandler);
 	$(bannerNextHandler);
