@@ -171,6 +171,9 @@ async function main() {
 	STORE.pagePrefix = 'projects';
 	STORE.displayed = [];
 
+	$('.menu').find('.projects-link').addClass('current-page-link');
+	$(ownPageLinkHandler);
+
 	displayPage( 0 );
 	$(galleryHandler);
 	$(galleryNextHandler);

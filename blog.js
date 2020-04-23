@@ -62,7 +62,10 @@ async function main() {
 	STORE.entriesPerPage = ENTRIES_PER_PAGE;
 	STORE.pagePrefix = 'blog';
 	STORE.displayed = [];
-	
+
+	$('.menu').find('.blog-link').addClass('current-page-link');
+	$(ownPageLinkHandler);
+
 	$(clearSearchHandler);
 	$(gotoPageHandler);
 	// Search field handlers

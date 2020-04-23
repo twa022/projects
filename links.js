@@ -62,6 +62,9 @@ async function main() {
 	STORE.pagePrefix = 'links';
 	STORE.entriesPerPage = ENTRIES_PER_PAGE;
 	STORE.displayed = [];
+
+	$('.menu').find('.links-link').addClass('current-page-link');
+	$(ownPageLinkHandler);
 	
 	$(clearSearchHandler);
 	$(gotoPageHandler);

@@ -201,6 +201,17 @@ function displayPage( pageNum = 0 ) {
  ********************************/
 
 /**
+ * Event handler when the home link is clicked 
+ * No need to reload the page since we're already on the home page
+ */
+function ownPageLinkHandler() {
+	$('.menu').on('click', '.current-page-link', function( event ) {
+		event.preventDefault();
+		overlayOut();
+	})
+}
+
+/**
  * Event handler when the hamburger menu button is pressed (smaller screen menu)
  * Displays the menu as an overlay
  */

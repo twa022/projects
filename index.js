@@ -151,17 +151,6 @@ function toggleSlideshow( start ) {
  ********************************/
 
 /**
- * Event handler when the home link is clicked 
- * No need to reload the page since we're already on the home page
- */
-function homeLinkHandler() {
-	$('.home-link').click( function( event ) {
-		event.preventDefault();
-		overlayOut();
-	})
-}
-
-/**
  * Event handler when the next slide button on the projects banner is activated
  * Advances the slideshow to the next slide.
  */
@@ -216,10 +205,12 @@ async function main() {
 	// Have to wait for this to finish since commonMain loads the STORE and we need it to populate the page
 	await commonMain();
 
+	$('.menu').find('.home-link').addClass('current-page-link');
+	$(ownPageLinkHandler);
+
 	$(bannerPrevHandler);
 	$(bannerNextHandler);
 	$(pauseSlideshowHandler);
-	$(homeLinkHandler);
 	$(slideshowSwipeLeftHandler);
 	$(slideshowSwipeRightHandler);
 
