@@ -25,15 +25,20 @@
 }
 
 .header-background {
+	--blur: 8px;
 	display: inline-block;
 	position: fixed;
-	width: 100%;
+	width: calc( 90% + var(--blur) * 2 );
+	max-width: calc( var(--max-width) + var(--blur) * 2 );
 	top: 0;
-	left: 0;
-	height: calc( var(--header-height) + 30px );
+	left: 50%;
+	transform: translateX(-50%);
+	height: calc( var(--header-height) + 40px );
 	z-index: 2;
 	display: none;
-	backdrop-filter: blur(6px); /* grayscale(0.8) opacity(0.8); */
+	backdrop-filter: blur(var(--blur)) grayscale(0.5);
+	border-bottom-left-radius: calc( 12px + var(--blur));
+	border-bottom-right-radius: calc( 12px + var(--blur));
 }
 
 body {
