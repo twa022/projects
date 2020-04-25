@@ -474,6 +474,7 @@ fieldset {
 		top: calc( var(--header-height) + 40px );
 		transform: unset;
 	}
+}
 
 
 @media screen and ( min-width: 640px ) {
