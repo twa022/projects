@@ -9,7 +9,7 @@
 	--red: #E82A40;
 }
 
-.background, .header-background {
+.background {
 	background-image: linear-gradient( rgba( 150, 150, 150, 0.8 ), rgba( 150, 150, 150, 0.8 ) ),
 				url("https://images.unsplash.com/photo-1550645612-83f5d594b671?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80");
 	height: 100%;
@@ -25,9 +25,15 @@
 }
 
 .header-background {
+	display: inline-block;
+	position: fixed;
+	width: 100%;
+	top: 0;
+	left: 0;
 	height: calc( var(--header-height) + 30px );
 	z-index: 2;
 	display: none;
+	backdrop-filter: blur(6px); /* grayscale(0.8) opacity(0.8); */
 }
 
 body {
