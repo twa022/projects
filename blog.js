@@ -66,7 +66,6 @@ async function main() {
 	$('.menu').find('.blog-link').addClass('current-page-link');
 	$(ownPageLinkHandler);
 
-	$(clearSearchHandler);
 	$(gotoPageHandler);
 	// Search field handlers
 	$(clearSearchHandler);
