@@ -5,6 +5,7 @@
 
 .blog-entry {
 	margin-top: 12px;
+	overflow: auto;
 }
 
 .blog-img {
