@@ -362,9 +362,7 @@ function searchHandler() {
 async function commonMain() {
 	// Firefox doesn't support the backdrop-filter CSS property yet; add alternate method of
 	// obscuring the content behind the header on scroll.
-	if ( !CSS.supports("backdrop-filter: blur(2px)") ) {
-		$('.header-background').addClass('header-background-ff');
-	}
+	$('.header-background').addClass( ( CSS.supports("backdrop-filter: blur(2px)") ) ? 'header-background-blur' : 'header-background-cover' );
 	// Activate all the event handlers
 	$(hamburgerMenuHandler);
 	$(contactLinkHandler);

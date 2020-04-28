@@ -25,31 +25,33 @@
 }
 
 .header-background {
-	--blur: 8px;
 	display: inline-block;
 	position: fixed;
-	width: calc( 90% + var(--blur) * 2 );
-	max-width: calc( var(--max-width) + var(--blur) * 2 );
 	top: 0;
 	left: 50%;
 	transform: translateX(-50%);
 	height: calc( var(--header-height) + 40px );
 	z-index: 2;
+	width: 100%;
+	height: calc( var(--header-height) + 40px );
+}
+
+.header-background-blur {
+	--blur: 8px;
+	width: calc( 90% + var(--blur) * 2 );
+	max-width: calc( var(--max-width) + var(--blur) * 2 );
 	backdrop-filter: blur(var(--blur)) grayscale(0.5);
 	border-bottom-left-radius: calc( 12px + var(--blur));
 	border-bottom-right-radius: calc( 12px + var(--blur));
 }
 
-.header-background-ff {
+.header-background-cover {
 	background-image: linear-gradient( rgba( 150, 150, 150, 0.8 ), rgba( 150, 150, 150, 0.8 ) ),
 				url("https://images.unsplash.com/photo-1550645612-83f5d594b671?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80");
 	filter: blur(2px);
 	/*background-repeat: no-repeat;*/
 	background-size: 100%;
 	background-position: center top;
-	width: 100%;
-	max-width: unset;
-	border-radius: unset;
 }
 
 body {
